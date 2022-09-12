@@ -1,12 +1,21 @@
-import React from "react";
-// import { Counter } from "./features/counter/Counter";
+import CssBaseline from "@mui/material/CssBaseline";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
 import "./App.css";
-import { MainLayout } from "./layouts/MainLayout";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { LandPageLayout } from "./layouts/LandPageLayout";
 
 export const App = () => {
   return (
     <div className="App">
-      <MainLayout />
+      <CssBaseline />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/*" element={<LandPageLayout />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };
