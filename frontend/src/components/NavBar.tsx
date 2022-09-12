@@ -1,24 +1,7 @@
-import {
-  AppBar,
-  IconButton,
-  Toolbar,
-  Typography,
-  Grid,
-  Box,
-} from "@mui/material";
-import {
-  Menu as MenuIcon,
-  Notifications as NotificationsIcon,
-  Settings as SettingsIcon,
-  ArrowDropDown as ArrowDropDownIcon,
-} from "@mui/icons-material";
+import { AppBar, Toolbar, Typography, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 
-export const NavBar = (props: { handleSideBarChange: Function }) => {
-  const openMenu = () => {
-    props.handleSideBarChange(true);
-  };
-
+export const NavBar = () => {
   const drawerWidth: number = 240;
 
   return (
@@ -42,19 +25,9 @@ export const NavBar = (props: { handleSideBarChange: Function }) => {
                 {/* Marca */}
                 <Link to="/" style={{ textDecoration: "none", color: "white" }}>
                   <Typography variant="h6">
-                    <span className="">NOTAS</span>
+                    <span className="">JBU</span>
                   </Typography>
                 </Link>
-
-                {/* MenuIcon para desktop */}
-                <IconButton
-                  onClick={openMenu}
-                  className="{classes.menuButton}"
-                  color="inherit"
-                  aria-label="menu"
-                >
-                  <MenuIcon />
-                </IconButton>
               </Grid>
             </Toolbar>
           </Grid>
@@ -62,26 +35,43 @@ export const NavBar = (props: { handleSideBarChange: Function }) => {
           {/* Menu derecha vista desktop */}
           <Grid item>
             <Toolbar>
-              <IconButton className="{classes.menuButton}" color="inherit">
-                <NotificationsIcon />
-              </IconButton>
-
-              <Box sx={{ display: { xs: "none", md: "block" } }}>
-                <Grid
-                  container
-                  direction="row"
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  <IconButton className="{classes.menuButton}" color="inherit">
-                    <SettingsIcon />
-                  </IconButton>
-
-                  <IconButton className="{classes.menuButton}" color="inherit">
-                    <ArrowDropDownIcon />
-                  </IconButton>
-                </Grid>
-              </Box>
+              {/* Links */}
+              <Link
+                to="/#"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  margin: "10px",
+                }}
+              >
+                <Typography variant="h6">
+                  <span className="">Inicio</span>
+                </Typography>
+              </Link>
+              <Link
+                to="/#"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  margin: "10px",
+                }}
+              >
+                <Typography variant="h6">
+                  <span className="">Equipo</span>
+                </Typography>
+              </Link>
+              <Link
+                to="/#"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  margin: "10px",
+                }}
+              >
+                <Typography variant="h6">
+                  <span className="">Mapa</span>
+                </Typography>
+              </Link>
             </Toolbar>
           </Grid>
         </Grid>
