@@ -6,16 +6,20 @@ import "@fontsource/roboto/700.css";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LandPageLayout } from "./layouts/LandPageLayout";
+import { ThemeProvider } from "@mui/material/styles";
+import { customTheme } from "./theme/theme";
 
 export const App = () => {
   return (
     <div className="App">
       <CssBaseline />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/*" element={<LandPageLayout />} />
-        </Routes>
-      </BrowserRouter>
+      <ThemeProvider theme={customTheme}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/*" element={<LandPageLayout />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
     </div>
   );
 };
