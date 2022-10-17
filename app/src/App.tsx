@@ -1,25 +1,16 @@
-import CssBaseline from "@mui/material/CssBaseline";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LandPageLayout } from "./layouts/LandPageLayout";
-import { ThemeProvider } from "@mui/material/styles";
-import { customTheme } from "./theme/theme";
 
 export const App = () => {
   return (
     <div className="App">
-      <CssBaseline />
-      <ThemeProvider theme={customTheme}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/*" element={<LandPageLayout />} />
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/*" element={<LandPageLayout />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };
