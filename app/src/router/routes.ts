@@ -1,12 +1,14 @@
 // ROUTE NAMES
 
-const root = "/app";
+const root = "/";
+const app = "/app";
 
 export const ROUTES = {
   ROOT: root,
-  // DASHBOARD: `${root}/dashboard`,
-  // SOLICITUDES: `${root}/solicitudes`,
-  // EMPLEADOS: `${root}/empleados`,
-  // MENSAJES: `${root}/mensajes`,
-  // ORDENES: `${root}/ordenes`,
+  APP: app,
+  DASHBOARD: `${app}/dashboard`,
+  // SOLICITUDES: `${app}/solicitudes`,
+  // EMPLEADOS: `${app}/empleados`,
+  // MENSAJES: `${app}/mensajes`,
+  // ORDENES: `${app}/ordenes`,
 };
