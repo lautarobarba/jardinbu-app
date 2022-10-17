@@ -1,4 +1,4 @@
-# React Frontend Container
+# App para el Jardín Botánico De Ushuaia
 
 ## Dependencias
 
