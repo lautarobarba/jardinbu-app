@@ -1,16 +1,12 @@
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { LandPageLayout } from "./layouts/LandPageLayout";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./router/router";
 
 export const App = () => {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/*" element={<LandPageLayout />} />
-        </Routes>
-      </BrowserRouter>
+      <RouterProvider router={router} />
     </div>
   );
 };
