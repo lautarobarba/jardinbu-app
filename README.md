@@ -1,5 +1,15 @@
 # App para el Jardín Botánico De Ushuaia
 
+## Tecnologías
+
+**Proyecto ReactJS (typescript)**
+
+### Librerias y otros
+
+- MDBootstrap
+- React-router-dom
+- Redux
+
 ## Dependencias
 
 - Docker (Apéndice)
