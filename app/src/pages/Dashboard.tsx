@@ -1,7 +1,11 @@
+import { PageSubTitle } from "../components/PageSubTitle";
+import { PageTitle } from "../components/PageTitle";
+
 export const Dashboard = () => {
   return (
     <>
-      <h1>Dashboard</h1>
+      <PageTitle title="Biblioteca del Bosque" />
+      <PageSubTitle title="Dashboard" />
     </>
   );
 };

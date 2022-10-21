@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
     errorElement: <Page404 />,
     children: [
       {
-        // path: '/app/dashboard',
+        // path: '/app',
         path: ROUTES.DASHBOARD,
         element: <Dashboard />,
       },
