@@ -4,7 +4,9 @@ export const NavBar = () => {
   // const drawerWidth: number = 240;
 
   return (
-    <div>AppBar</div>
+    <div style={{ backgroundColor: "grey", width: "100%", height: "50px" }}>
+      NAVBAR
+    </div>
     // <AppBar position="sticky">
     //   <Toolbar style={{ paddingLeft: 0 }}>
     //     <Grid

@@ -3,6 +3,7 @@ import { ROUTES } from "./routes";
 import { DashboardLayout } from "../layouts/DashboardLayout";
 import { Page404 } from "../pages/Page404";
 import { Dashboard } from "../pages/Dashboard";
+import { SpeciesPage } from "../pages/SpeciesPage";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,11 @@ export const router = createBrowserRouter([
         // path: '/app/dashboard',
         path: ROUTES.DASHBOARD,
         element: <Dashboard />,
+      },
+      {
+        // path: '/app/especies',
+        path: ROUTES.SPECIES,
+        element: <SpeciesPage />,
       },
     ],
   },
