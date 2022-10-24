@@ -1,8 +1,9 @@
 interface Props {
   title: string;
+  className?: string;
 }
 
 export const PageSubTitle = (props: Props) => {
-  const { title } = props;
-  return <h2>{title}</h2>;
+  const { title, className } = props;
+  return <h2 className={className}>{title}</h2>;
 };

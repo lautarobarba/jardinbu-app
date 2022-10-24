@@ -1,8 +1,24 @@
 import { useRouteError } from "react-router-dom";
+import { PageTitle } from "../components/PageTitle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGear } from "@fortawesome/free-solid-svg-icons";
+import { PageSubTitle } from "../components/PageSubTitle";
 
 export function Page404() {
   const error = useRouteError();
   if (error) console.error(error);
 
-  return <h1>Page404</h1>;
+  return (
+    <>
+      <div style={{ minHeight: "100px" }}></div>
+      {/* TODO: Reemplazar icono por una imagen del jardin */}
+      <FontAwesomeIcon
+        icon={faGear}
+        className="w-100 text-center"
+        style={{ height: "200px" }}
+      />
+      <PageTitle title="Error 404" />
+      <PageSubTitle className="text-center" title="Página no encontrada" />
+    </>
+  );
 }
