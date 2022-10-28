@@ -8,4 +8,6 @@ export const ROUTES = {
   APP: app,
   DASHBOARD: "",
   SPECIES: "species",
+  // 404 Error
+  ELSE: "*",
 };

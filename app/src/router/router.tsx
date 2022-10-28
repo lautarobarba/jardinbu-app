@@ -15,7 +15,6 @@ export const router = createBrowserRouter([
     // path: '/app',
     path: ROUTES.APP,
     element: <DashboardLayout />,
-    errorElement: <Page404 />,
     children: [
       {
         // path: '/app',
@@ -27,6 +26,18 @@ export const router = createBrowserRouter([
         path: ROUTES.SPECIES,
         element: <SpeciesPage />,
       },
+      {
+        // Si no encuentro ninguna de las rutas anteriores entonces renderizo 404
+        // path: '/app/*',
+        path: ROUTES.ELSE,
+        element: <Page404 />,
+      },
     ],
+  },
+  {
+    // Si no encuentro ninguna de las rutas anteriores entonces renderizo 404
+    // path: '/*',
+    path: ROUTES.ELSE,
+    element: <Page404 />,
   },
 ]);
