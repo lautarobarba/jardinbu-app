@@ -14,7 +14,7 @@ import {
   // MDBDropdownItem,
   // MDBCollapse,
 } from "mdb-react-ui-kit";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface Props {
   handleSideBarChange: Function;
@@ -28,7 +28,9 @@ export const NavBar = (props: Props) => {
     <MDBNavbar className="navbar fixed-top navbar-expand-md bg-dark">
       <div className="container-fluid">
         <div className="w-100 d-flex justify-content-between">
-          <MDBNavbarBrand className="text-white">JBU</MDBNavbarBrand>
+          <MDBNavbarBrand className="text-white" href="/app">
+            JBU
+          </MDBNavbarBrand>
           <MDBNavbarBrand className="text-white">Avatar</MDBNavbarBrand>
         </div>
       </div>

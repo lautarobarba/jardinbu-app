@@ -4,6 +4,7 @@ import { DashboardLayout } from "../layouts/DashboardLayout";
 import { Page404 } from "../pages/Page404";
 import { Dashboard } from "../pages/Dashboard";
 import { SpeciesPage } from "../pages/SpeciesPage";
+import { FamiliesPage } from "../pages/FamiliesPage";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,11 @@ export const router = createBrowserRouter([
         // path: '/app',
         path: ROUTES.DASHBOARD,
         element: <Dashboard />,
+      },
+      {
+        // path: '/app/family',
+        path: ROUTES.FAMILY,
+        element: <FamiliesPage />,
       },
       {
         // path: '/app/especies',

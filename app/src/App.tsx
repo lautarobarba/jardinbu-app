@@ -10,7 +10,6 @@ export const App = () => {
   return (
     <div className="App">
       <QueryClientProvider client={queryClient}>
-        {/* The rest of your application */}
         <ReactQueryDevtools initialIsOpen={false} />
         <RouterProvider router={router} />
       </QueryClientProvider>

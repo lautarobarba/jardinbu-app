@@ -33,7 +33,10 @@ export const DashboardLayout = () => {
         drawerWidth={DRAWERWIDTH}
         menuState={menuState}
       />
-      <Outlet />
+      <div>
+        <div id="nav-bar-spacer" className="" style={{ height: "65px" }}></div>
+        <Outlet />
+      </div>
     </>
   );
 };
