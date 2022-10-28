@@ -3,6 +3,7 @@ import { PageTitle } from "../components/PageTitle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { PageSubTitle } from "../components/PageSubTitle";
+import { Link } from "react-router-dom";
 
 export function Page404() {
   const error = useRouteError();
@@ -19,6 +20,9 @@ export function Page404() {
       />
       <PageTitle title="Error 404" />
       <PageSubTitle className="text-center" title="Página no encontrada" />
+      <div className="w-100 d-flex justify-content-center">
+        <Link to={"/app"}>Volver al Dashboard</Link>
+      </div>
     </>
   );
 }
