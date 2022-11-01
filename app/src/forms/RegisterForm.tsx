@@ -4,6 +4,7 @@ import { FormikHelpers, useFormik } from 'formik';
 import { TextField } from '@mui/material';
 import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 import { Link } from "react-router-dom";
+import { CreateUserDto } from '../interfaces/CreateUserDto';
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email("El email no es válido.")
@@ -49,7 +50,14 @@ export const RegisterForm = () => {
       values: Values,
       { setErrors }: FormikHelpers<Values>
     ) => {
-			console.log('submited');
+      const createUserDto: CreateUserDto = {
+        email: values.email,
+        firstname: values.firstname,
+        lastname: values.lastname,
+        password: values.password
+      };
+      
+			console.log(createUserDto);
         // const response: ISession | IError = await register(values);
         // if (isISession(response)) {
         //     // Si se registro y se logueo correctamente entonces
