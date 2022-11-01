@@ -5,6 +5,9 @@ import { Page404 } from "../pages/Page404";
 import { Dashboard } from "../pages/Dashboard";
 import { SpeciesPage } from "../pages/SpeciesPage";
 import { FamiliesPage } from "../pages/FamiliesPage";
+import { AuthLayout } from "../layouts/AuthLayout";
+import { RegisterPage } from "../pages/RegisterPage";
+import { LoginPage } from "../pages/LoginPage";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +38,29 @@ export const router = createBrowserRouter([
       {
         // Si no encuentro ninguna de las rutas anteriores entonces renderizo 404
         // path: '/app/*',
+        path: ROUTES.ELSE,
+        element: <Page404 />,
+      },
+    ],
+  },
+  {
+    // path: '/app/auth',
+    path: ROUTES.AUTH,
+    element: <AuthLayout />,
+    children: [
+      {
+        // path: '/app/auth/register',
+        path: ROUTES.REGISTER,
+        element: <RegisterPage />,
+      },
+      {
+        // path: '/app/auth/login',
+        path: ROUTES.LOGIN,
+        element: <LoginPage />,
+      },
+      {
+        // Si no encuentro ninguna de las rutas anteriores entonces renderizo 404
+        // path: '/app/auth/*',
         path: ROUTES.ELSE,
         element: <Page404 />,
       },

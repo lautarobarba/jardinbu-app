@@ -5,5 +5,5 @@ interface Props {
 
 export const PageSubTitle = (props: Props) => {
   const { title, className } = props;
-  return <h2 className={className}>{title}</h2>;
+  return <h2 className={`pb-3 pt-3 ${className}`}>{title}</h2>;
 };

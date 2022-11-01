@@ -5,7 +5,7 @@ import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { PageSubTitle } from "../components/PageSubTitle";
 import { Link } from "react-router-dom";
 
-export function Page404() {
+export const Page404 = () => {
   const error = useRouteError();
   if (error) console.error(error);
 

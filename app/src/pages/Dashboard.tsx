@@ -20,6 +20,17 @@ export const Dashboard = () => {
           <Link to={"/app/species"}>Especies</Link>
         </li>
       </ul>
+      <hr />
+      <PageSubTitle title="Autenticación" />
+      <p>Aca va la autenticación...</p>
+      <ul>
+        <li>
+          <Link to={"/app/auth/register"}>Registro</Link>
+        </li>
+        <li>
+          <Link to={"/app/auth/login"}>Login</Link>
+        </li>
+      </ul>
     </>
   );
 };

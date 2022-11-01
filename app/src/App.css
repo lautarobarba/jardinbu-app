@@ -1,0 +1,21 @@
+h1 {
+	font-size: 1.5em;
+	font-family: 'Merriweather Sans', sans-serif;
+	color: black;
+	font-weight: bold;
+}
+
+h2 {
+	font-size: 1.3em;
+	font-family: 'Merriweather Sans', sans-serif;
+	color: black;
+	font-weight: bold;
+}
+
+.btn-bg-dark {
+	background-color: #1b1b1b;
+}
+
+.text-dark {
+	color: #1b1b1b;
+}
