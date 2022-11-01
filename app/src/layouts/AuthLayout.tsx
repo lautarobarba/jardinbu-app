@@ -25,7 +25,10 @@ export const AuthLayout = () => {
         </div>
 
         {/* Páginas */}
-        <div className="col-12 col-md-5 shadow-5-strong" style={{ backgroundColor: '#fbfcfe' }}>
+        <div 
+          className="col-12 col-md-5 shadow-5-strong d-flex flex-column justify-content-between" 
+          style={{ backgroundColor: '#fbfcfe' }}
+        >
           <Outlet />
           <Footer />
         </div>
