@@ -1,7 +1,7 @@
 import { PageSubTitle } from "../components/PageSubTitle";
 import { PageTitle } from "../components/PageTitle";
 import { useQuery } from "@tanstack/react-query";
-import { getFamilies } from "../services";
+import { getFamilies } from "../api/services";
 import { Family } from "../interfaces/Family";
 import { Link } from "react-router-dom";
 

@@ -1,7 +1,7 @@
 import { PageSubTitle } from "../components/PageSubTitle";
 import { PageTitle } from "../components/PageTitle";
 import { useQuery } from "@tanstack/react-query";
-import { getSpecies } from "../services";
+import { getSpecies } from "../api/services";
 
 interface Species {
   id: number;

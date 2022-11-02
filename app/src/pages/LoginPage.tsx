@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { PageSubTitle } from "../components/PageSubTitle";
 import { PageTitle } from "../components/PageTitle";
-// import { LoginForm } from "../forms/LoginForm";
+import { LoginForm } from "../forms/LoginForm";
 
 export const LoginPage = () => {
 
@@ -17,7 +17,7 @@ export const LoginPage = () => {
         <div style={{ maxWidth: '85%' }}>
           <PageTitle title="Biblioteca del bosque" className="mt-5"/>
           <PageSubTitle title="Iniciar sesión" className="text-center"/>
-          {/* <LoginForm /> */}
+          <LoginForm />
         </div>
       </div>
     </>

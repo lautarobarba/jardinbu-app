@@ -1,24 +1,17 @@
-import Axios from "axios";
-import { QueryClient } from "@tanstack/react-query";
+import Axios, { AxiosError, AxiosResponse } from "axios";
 import { CreateUserDto } from '../interfaces/CreateUserDto';
+import { LoginUserDto } from "../interfaces/LoginUserDto";
+import { SessionDto } from "../interfaces/SessionDto";
+
+
 // Api Url
 const apiBaseUrl: string = process.env.REACT_APP_APIURL ?? 'http://localhost:7000';
 
-// Create a client for QueryClientProvider
-export const queryClient = new QueryClient();
 
-// Client for fetch
+// Client to fetch
 const axiosClient = Axios.create({
   baseURL: `${apiBaseUrl}/api/`,
   timeout: 10 * 1000, // 10 sec
-  withCredentials: true,
-  // headers: (headers, { getState }) => {
-  //   const token: string = getState().auth.token;
-  //   if (token) {
-  //     headers.set('Authorization', `Bearer ${token}`);
-  //   }
-  //   return headers
-  // }
 });
 
 
@@ -29,6 +22,12 @@ const register = async (createUserDto: CreateUserDto, getState: any) => {
   return axiosClient.post('auth/register',
     createUserDto,
     { headers: { Authorization: `Bearer ${token}` } }
+  );
+}
+
+export const login = async (loginUserDto: LoginUserDto) => {
+  return await axiosClient.post('auth/login',
+    loginUserDto
   );
 }
 
