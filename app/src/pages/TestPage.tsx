@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { LoginUserDto } from '../interfaces/LoginUserDto';
 import { SessionDto } from "../interfaces/SessionDto";
 import { User } from "../interfaces/User";
-import { useGetAuthUser, useLogin } from '../api/api';
+import { useGetAuthUser, useLogin } from '../api/hooks';
 
 export const TestPage = () => {
 

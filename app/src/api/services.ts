@@ -28,6 +28,13 @@ export const login = async (loginUserDto: LoginUserDto): Promise<SessionDto> => 
   ).then(response => response.data);
 }
 
+export const logout = async (token: string): Promise<void> => {
+  return axiosClient.post('auth/logout',
+    { headers: { Authorization: `Bearer ${token}` } }
+  ).then(response => response.data);
+}
+
+
 
 // # Queries --------------------------------------------
 

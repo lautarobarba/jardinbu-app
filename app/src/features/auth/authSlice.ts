@@ -1,34 +1,43 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { SessionDto } from "../../interfaces/SessionDto";
 import { User } from "../../interfaces/User";
+import { RootState } from "../../redux/store";
 
 export interface AuthState {
 	user: User | null;
-	token: string | null;
+	session: SessionDto | null;
 }
 
+console.log('Recuperar credenciales en localstorage.')
 const initialState: AuthState = {
-	user: null,
-	token: null,
+	user: JSON.parse(String(localStorage.getItem('user'))),
+	session: JSON.parse(String(localStorage.getItem('session'))),
 };
 
 export const authSlice = createSlice({
 	name: 'auth',
-	initialState,
+	initialState: initialState,
 	reducers: {
 		setCredentials: (state, action) => {
-			const { user, accessToken } = action.payload;
+			// console.log('Guardar credenciales en localstorage.')
+			const { user, session } = action.payload;
 			state.user = user;
-			state.token = accessToken;
+			state.session = session;
+			localStorage.setItem('user', JSON.stringify(user));
+			localStorage.setItem('session', JSON.stringify(session));
 		},
-		logOut: (state, action) => {
+		removeCredentials: (state) => {
+			// console.log('Eliminar credenciales en localstorage.')
 			state.user = null;
-			state.token = null;
+			state.session = null;
+			localStorage.removeItem('user');
+			localStorage.removeItem('session');
 		}
 	}
 });
 
-export const { setCredentials, logOut } = authSlice.actions;
+export const { setCredentials, removeCredentials } = authSlice.actions;
 export default authSlice.reducer;
 
-export const selectCurrentUser = (state: any) => state.auth.user;
-export const selectCurrentToken = (state: any) => state.auth.token;
+export const selectCurrentUser = (state: RootState) => state.auth.user;
+export const selectCurrentSession = (state: RootState) => state.auth.session;

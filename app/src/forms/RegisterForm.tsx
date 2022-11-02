@@ -6,7 +6,7 @@ import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 import { Link } from "react-router-dom";
 import Axios from 'axios';
 import { CreateUserDto } from '../interfaces/CreateUserDto';
-import { useGetAuthUser, useRegisterUser } from "../api/api";
+import { useGetAuthUser, useRegisterUser } from "../api/hooks";
 import { SessionDto } from "../interfaces/SessionDto";
 
 const ValidationSchema = Yup.object().shape({

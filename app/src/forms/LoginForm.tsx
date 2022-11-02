@@ -7,7 +7,9 @@ import { Link } from "react-router-dom";
 import { LoginUserDto } from '../interfaces/LoginUserDto';
 import Axios from 'axios';
 import { SessionDto } from '../interfaces/SessionDto';
-import { useGetAuthUser, useLogin } from '../api/api';
+import { useGetAuthUser, useLogin } from '../api/hooks';
+import { useAppSelector, useAppDispatch } from '../redux/hooks'
+import { selectCurrentSession, setCredentials } from "../features/auth/authSlice";
 
 
 const ValidationSchema = Yup.object().shape({
@@ -26,6 +28,20 @@ interface Values {
 
 export const LoginForm = () => {
 
+  // Recupero la session actual de la storage 
+  //  para saber si el usuario esta autenticado
+  const logueado = useAppSelector(selectCurrentSession);
+  
+  useEffect(() => {
+    if(logueado){
+      console.log({ mess: 'USER LOGUEADO' });
+      console.log(logueado);
+    } else {
+      console.log({ mess: 'USER NO LOGUEADO' });
+      console.log(logueado);
+    }
+  }, [logueado]);
+
   const { 
     mutate: loginMutate,
     isLoading: loginIsLoading,
@@ -34,17 +50,24 @@ export const LoginForm = () => {
     // error: loginError
   } = useLogin();
 
-  const [ userToken, setUserToken ] = useState<string>('');
+  // const [ userToken, setUserToken ] = useState<string>('');
+  const [ session, setSession ] = useState<SessionDto>({accessToken: '', refreshToken: ''});
 
-  const {     
+  const {
     // isLoading: getAuthUserIsLoading,
     data: getAuthUserData,
-    // isSuccess: getAuthUserIsSuccess,
+    isSuccess: getAuthUserIsSuccess,
     // isError: getAuthUserIsError,
     // error: getAuthUserError 
-  } = useGetAuthUser(userToken ,{
-    enabled: loginIsSuccess
+  // } = useGetAuthUser(session?.accessToken ,{
+  } = useGetAuthUser(session.accessToken, {
+    enabled: loginIsSuccess,
+    onSuccess: () => {
+
+    }
   });
+
+  const dispatch = useAppDispatch();
 
 	const formik = useFormik({
     initialValues: {
@@ -91,22 +114,35 @@ export const LoginForm = () => {
             }
           }
         },
-        onSuccess: (tokens: SessionDto) => {
-          console.log(tokens);
-          setUserToken(tokens.accessToken);
+        onSuccess: (session: SessionDto) => {
+          console.log(session);
+          setSession(session);
         }
       });
     },
   });
 
-  if (loginIsSuccess){
-    console.log('Actualizar REDUX userSlice')
-    console.log({
-      status: 'SUCCESS',
-      token: userToken,
-      user: getAuthUserData
-    });
-  }
+  useEffect(() => {
+    if (loginIsSuccess && getAuthUserIsSuccess) {
+      console.log('Actualizar REDUX userSlice')
+      console.log({
+        status: 'SUCCESS',
+        user: getAuthUserData,
+        session: session
+      });
+  
+      dispatch(setCredentials({
+        user: getAuthUserData,
+        session: session
+      }));
+    }
+  }, [
+    loginIsSuccess, 
+    getAuthUserIsSuccess, 
+    getAuthUserData, 
+    dispatch, 
+    session
+  ]);
 
 	return (
     <form onSubmit={formik.handleSubmit}>
