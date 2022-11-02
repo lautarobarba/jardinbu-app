@@ -8,6 +8,7 @@ import { FamiliesPage } from "../pages/FamiliesPage";
 import { AuthLayout } from "../layouts/AuthLayout";
 import { RegisterPage } from "../pages/RegisterPage";
 import { LoginPage } from "../pages/LoginPage";
+import { TestPage } from "../pages/TestPage";
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +66,11 @@ export const router = createBrowserRouter([
         element: <Page404 />,
       },
     ],
+  },
+  {
+    // path: '/test',
+    path: ROUTES.TEST,
+    element: <TestPage />,
   },
   {
     // Si no encuentro ninguna de las rutas anteriores entonces renderizo 404

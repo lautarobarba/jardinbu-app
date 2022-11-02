@@ -11,4 +11,6 @@ export const ROUTES = {
   SPECIES: "species",
   // 404 Error
   ELSE: "*",
+  // Test
+  TEST: "/test",
 };

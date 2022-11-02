@@ -1,7 +1,7 @@
 import { PageSubTitle } from "../components/PageSubTitle";
 import { PageTitle } from "../components/PageTitle";
-import { useQuery } from "@tanstack/react-query";
-import { getSpecies } from "../api/services";
+// import { useQuery } from "@tanstack/react-query";
+// import { getSpecies } from "../api/services";
 
 interface Species {
   id: number;
@@ -16,10 +16,10 @@ interface Species {
 
 export const SpeciesPage = () => {
   // Queries
-  const { isLoading, isError, data, error } = useQuery<Species[]>(
-    ["species"],
-    getSpecies
-  );
+  // const { isLoading, isError, data, error } = useQuery<Species[]>(
+  //   ["species"],
+  //   getSpecies
+  // );
 
   // Mutations
   // const mutation = useMutation(postTodo, {
@@ -29,16 +29,16 @@ export const SpeciesPage = () => {
   //   },
   // });
 
-  if (isError) {
-    console.log(error);
-    return <h1>Error...</h1>;
-  }
+  // if (isError) {
+  //   console.log(error);
+  //   return <h1>Error...</h1>;
+  // }
 
   return (
     <>
       <PageTitle title="Especies" />
       <PageSubTitle title="Listado" />
-
+{/* 
       {isLoading ? (
         <p>CARGANDO...</p>
       ) : (
@@ -51,7 +51,7 @@ export const SpeciesPage = () => {
             })}
           </ul>
         </div>
-      )}
+      )} */}
     </>
   );
 };

@@ -1,12 +1,12 @@
-import Axios, { AxiosError, AxiosResponse } from "axios";
+import Axios from "axios";
 import { CreateUserDto } from '../interfaces/CreateUserDto';
 import { LoginUserDto } from "../interfaces/LoginUserDto";
 import { SessionDto } from "../interfaces/SessionDto";
+import { User } from "../interfaces/User";
 
 
 // Api Url
 const apiBaseUrl: string = process.env.REACT_APP_APIURL ?? 'http://localhost:7000';
-
 
 // Client to fetch
 const axiosClient = Axios.create({
@@ -15,37 +15,31 @@ const axiosClient = Axios.create({
 });
 
 
-// Mutations
-const register = async (createUserDto: CreateUserDto, getState: any) => {
-  const token: string = await getState().auth.token;
+// # Mutations ------------------------------------------------------------
 
-  return axiosClient.post('auth/register',
-    createUserDto,
+// ## Users
+export const registerUser = async (createUserDto: CreateUserDto): Promise<SessionDto> => {
+  return axiosClient.post('auth/register', createUserDto
+  ).then(response => response.data);
+}
+
+export const login = async (loginUserDto: LoginUserDto): Promise<SessionDto> => {
+  return axiosClient.post('auth/login', loginUserDto
+  ).then(response => response.data);
+}
+
+
+// # Queries --------------------------------------------
+
+// ## Users
+export const getAuthUser = async (token: string): Promise<User> => {
+  return axiosClient.get('auth/user',
     { headers: { Authorization: `Bearer ${token}` } }
-  );
+  ).then(response => response.data);
 }
 
-export const login = async (loginUserDto: LoginUserDto) => {
-  return await axiosClient.post('auth/login',
-    loginUserDto
-  );
-}
+// ## Families
 
+// ## Genra
 
-
-// SIN AXIOS
-// TODO: SACAAR ==========================================
-const baseURL: string = "http://localhost:7001/api/";
-
-// FindAll
-export const getFamilies = async () => {
-  const response = await fetch(`${baseURL}family`);
-  return response.json();
-  // return client.get("families");
-};
-
-export const getSpecies = async () => {
-  const response = await fetch("http://localhost/api/species");
-  return response.json();
-  // return client.get("species");
-};
+// ## Species

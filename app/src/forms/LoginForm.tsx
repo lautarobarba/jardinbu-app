@@ -1,21 +1,21 @@
-import * as React from 'react';
+import React, { useEffect, useState } from "react";
 import * as Yup from 'yup';
 import { FormikHelpers, useFormik } from 'formik';
 import { TextField } from '@mui/material';
 import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 import { Link } from "react-router-dom";
 import { LoginUserDto } from '../interfaces/LoginUserDto';
-import { useMutation } from '@tanstack/react-query';
-import { login } from '../api/services';
-import { AxiosError, AxiosResponse } from 'axios';
+import Axios from 'axios';
 import { SessionDto } from '../interfaces/SessionDto';
+import { useGetAuthUser, useLogin } from '../api/api';
 
-const SignupSchema = Yup.object().shape({
-  email: Yup.string().email("El email no es válido.")
+
+const ValidationSchema = Yup.object().shape({
+  email: Yup.string().email("El email no es válido")
     .required("Por favor, ingrese una cuenta de correo"),
   password: Yup.string()
-    .min(2, "Contraseña demaciado corta.")
-    .max(50, "Contraseña demaciado larga.")
+    .min(2, "Contraseña demaciado corta")
+    .max(50, "Contraseña demaciado larga")
     .required("Por favor, ingrese la contraseña"),
 });
 
@@ -26,14 +26,32 @@ interface Values {
 
 export const LoginForm = () => {
 
-  const { isLoading, mutate, data, isSuccess, isError, error } = useMutation(login);
+  const { 
+    mutate: loginMutate,
+    isLoading: loginIsLoading,
+    isSuccess: loginIsSuccess,
+    // isError: loginIsError,
+    // error: loginError
+  } = useLogin();
+
+  const [ userToken, setUserToken ] = useState<string>('');
+
+  const {     
+    // isLoading: getAuthUserIsLoading,
+    data: getAuthUserData,
+    // isSuccess: getAuthUserIsSuccess,
+    // isError: getAuthUserIsError,
+    // error: getAuthUserError 
+  } = useGetAuthUser(userToken ,{
+    enabled: loginIsSuccess
+  });
 
 	const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
-    validationSchema: SignupSchema,
+    validationSchema: ValidationSchema,
     onSubmit: async (
       values: Values,
       { setErrors }: FormikHelpers<Values>
@@ -43,53 +61,50 @@ export const LoginForm = () => {
         password: values.password
       };
       
-			console.log(loginUserDto);
-      mutate(loginUserDto);
-      // mutate(loginUserDto, {
-      //   onError: (error) => {
-      //     console.log(error);
-      //     // if(typeof error === 'AxiosError'){}
-      //     // console.log(error.response.data);
-      //     // console.log(error.response.data);
-
-      //     // console.log(error?.response?.status);
-      //     // if(error?.response?.status == '404'){
-      //     //   console.log('NoexisteLaCUENTA');
-      //     // } else if (error?.response?.status == '401'){
-      //     //   console.log('ContraseñaIncorrecta');
-      //     // }
-      //   },
-      //   onSuccess: (response) => {
-      //     if(response instanceof SessionDto)
-      //     console.log(response.data);
-      //     // const accessToken: string = response.data.accessToken;
-      //     // const refreshToken: string = response.data.refreshToken;
-      //     // console.log({accessToken});
-      //   }
-      // });
-        // const response: ISession | IError = await register(values);
-        // if (isISession(response)) {
-        //     // Si se registro y se logueo correctamente entonces
-        //     window.location.href = "/";
-        // } else if (isIError(response)) {
-        //     if(('message' in response) && (response.message === 'Email already in use')){
-        //         setErrors({ email: 'El email ya está en uso.' });
-        //     }
-        // }
+			// console.log(loginUserDto);
+      loginMutate(loginUserDto, {
+        onError: (error) => {
+          if(Axios.isAxiosError(error)){
+            const errorCode = error.response?.status;
+            console.log({ errorCode });
+            if(Number(errorCode) === 404){
+              console.log({
+                error: errorCode,
+                mensaje: error.response?.data.message
+              });
+              setErrors({
+                email: 'La cuenta no existe'
+              })
+            } else if (Number(errorCode) === 401){
+              console.log({
+                error: errorCode,
+                mensaje: error.response?.data.message
+              });
+              setErrors({
+                password: 'Contraseña incorrecta'
+              })
+            } else {
+              console.log({
+                error: errorCode,
+                mensaje: error.response?.data.message
+              });
+            }
+          }
+        },
+        onSuccess: (tokens: SessionDto) => {
+          console.log(tokens);
+          setUserToken(tokens.accessToken);
+        }
+      });
     },
   });
 
-  if (isSuccess){
+  if (loginIsSuccess){
+    console.log('Actualizar REDUX userSlice')
     console.log({
       status: 'SUCCESS',
-      response: data
-    });
-  }
-
-  if (isError){
-    console.log({
-      status: 'ERROR',
-      response: error
+      token: userToken,
+      user: getAuthUserData
     });
   }
 
@@ -128,10 +143,10 @@ export const LoginForm = () => {
 				size='lg'
         type="submit"
 				className='bg-dark w-100'
-        disabled={ isLoading ? true : false }
         style={{ marginTop: "1rem", marginBottom: "1rem" }}
+        disabled={ loginIsLoading }
       >
-        { isLoading ? (
+        { loginIsLoading ? (
           'Iniciando sesión...'
         ) : (
           'Iniciar sesión'
@@ -141,7 +156,8 @@ export const LoginForm = () => {
 			<div className="">
         <div>
 				<Link 
-          to={"/app/auth/recover-password"} 
+          // to={"/app/auth/recover-password"} 
+          to={"#"} 
           className="text-dark"
         >
           ¿Olvidaste tu contraseña?

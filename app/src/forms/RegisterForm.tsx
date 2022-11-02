@@ -1,31 +1,34 @@
-import * as React from 'react';
+import React, { useEffect, useState } from "react";
 import * as Yup from 'yup';
 import { FormikHelpers, useFormik } from 'formik';
 import { TextField } from '@mui/material';
 import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
 import { Link } from "react-router-dom";
+import Axios from 'axios';
 import { CreateUserDto } from '../interfaces/CreateUserDto';
+import { useGetAuthUser, useRegisterUser } from "../api/api";
+import { SessionDto } from "../interfaces/SessionDto";
 
-const SignupSchema = Yup.object().shape({
-  email: Yup.string().email("El email no es válido.")
-    .required("La cuenta necesita un correo."),
+const ValidationSchema = Yup.object().shape({
+  email: Yup.string().email("El email no es válido")
+    .required("La cuenta necesita un correo"),
 	firstname: Yup.string()
-    .min(2, "Nombre demaciado corto.")
-    .max(50, "Nombre demaciado largo.")
-    .required("El usuario necesita un nombre."),
+    .min(2, "Nombre demaciado corto")
+    .max(50, "Nombre demaciado largo")
+    .required("El usuario necesita un nombre"),
 	lastname: Yup.string()
-    .min(1, "Apellido demaciado corto.")
-    .max(50, "Apellido demaciado largo.")
-    .required("El usuario necesita un apellido."),
+    .min(1, "Apellido demaciado corto")
+    .max(50, "Apellido demaciado largo")
+    .required("El usuario necesita un apellido"),
   password: Yup.string()
-    .min(2, "Contraseña demaciado corta.")
-    .max(50, "Contraseña demaciado larga.")
-    .required("La cuenta necesita una contraseña."),
+    .min(2, "Contraseña demaciado corta")
+    .max(50, "Contraseña demaciado larga")
+    .required("La cuenta necesita una contraseña"),
   password2: Yup.string()
-    .min(2, "Contraseña demaciado corta.")
-    .max(50, "Contraseña demaciado larga.")
-    .equals([Yup.ref("password")], "Las contraseñas no coinciden.")
-    .required("Por favor repita la contraseña."),
+    .min(2, "Contraseña demaciado corta")
+    .max(50, "Contraseña demaciado larga")
+    .equals([Yup.ref("password")], "Las contraseñas no coinciden")
+    .required("Por favor repita la contraseña"),
 });
 
 interface Values {
@@ -37,6 +40,27 @@ interface Values {
 }
 
 export const RegisterForm = () => {
+
+  const { 
+    mutate: registerMutate,
+    isLoading: registerIsLoading,
+    isSuccess: registerIsSuccess,
+    // isError: registerIsError,
+    // error: registerError
+  } = useRegisterUser();
+
+  const [ userToken, setUserToken ] = useState<string>('');
+
+  const {     
+    // isLoading: getAuthUserIsLoading,
+    data: getAuthUserData,
+    // isSuccess: getAuthUserIsSuccess,
+    // isError: getAuthUserIsError,
+    // error: getAuthUserError 
+  } = useGetAuthUser(userToken ,{
+    enabled: registerIsSuccess
+  });
+
 	const formik = useFormik({
     initialValues: {
       email: "",
@@ -45,7 +69,7 @@ export const RegisterForm = () => {
       password: "",
       password2: "",
     },
-    validationSchema: SignupSchema,
+    validationSchema: ValidationSchema,
     onSubmit: async (
       values: Values,
       { setErrors }: FormikHelpers<Values>
@@ -57,18 +81,54 @@ export const RegisterForm = () => {
         password: values.password
       };
       
-			console.log(createUserDto);
-        // const response: ISession | IError = await register(values);
-        // if (isISession(response)) {
-        //     // Si se registro y se logueo correctamente entonces
-        //     window.location.href = "/";
-        // } else if (isIError(response)) {
-        //     if(('message' in response) && (response.message === 'Email already in use')){
-        //         setErrors({ email: 'El email ya está en uso.' });
-        //     }
-        // }
+			// console.log(createUserDto);
+      registerMutate(createUserDto, {
+        onError: (error) => {
+          if(Axios.isAxiosError(error)){
+            const errorCode = error.response?.status;
+            console.log({ errorCode });
+            if(Number(errorCode) === 406){
+              console.log({
+                error: errorCode,
+                mensaje: error.response?.data.message
+              });
+            } else if (Number(errorCode) === 409){
+              console.log({
+                error: errorCode,
+                mensaje: error.response?.data.message
+              });
+              setErrors({
+                email: 'Este email ya se encuentra registrado'
+              })
+            } else if (Number(errorCode) === 413){
+              console.log({
+                error: errorCode,
+                mensaje: error.response?.data.message
+              });
+            } else {
+              console.log({
+                error: errorCode,
+                mensaje: error.response?.data.message
+              });
+            }
+          }
+        },
+        onSuccess: (tokens: SessionDto) => {
+          console.log(tokens);
+          setUserToken(tokens.accessToken);
+        }
+      });
     },
   });
+
+  if (registerIsSuccess){
+    console.log('Actualizar REDUX userSlice')
+    console.log({
+      status: 'SUCCESS',
+      token: userToken,
+      user: getAuthUserData
+    });
+  }
 
 	return (
     <form onSubmit={formik.handleSubmit}>
@@ -148,8 +208,13 @@ export const RegisterForm = () => {
         type="submit"
 				className='bg-dark w-100'
         style={{ marginTop: "1rem", marginBottom: "1rem" }}
+        disabled={ registerIsLoading }
       >
-        Registrarse
+        { registerIsLoading ? (
+          'Registrando...'
+        ) : (
+          'Registrarse'
+        )}
       </MDBBtn>
 			<div className="container">
 				<Link to={"/app/auth/login"} className="text-dark">¿Ya tenés cuenta? Iniciá sesión</Link>
