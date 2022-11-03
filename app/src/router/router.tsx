@@ -1,14 +1,17 @@
 import { createBrowserRouter } from "react-router-dom";
 import { ROUTES } from "./routes";
-import { DashboardLayout } from "../layouts/DashboardLayout";
+import { PublicLayout } from "../layouts/PublicLayout";
+import { PrivateLayout } from "../layouts/PrivateLayout";
+import { AuthLayout } from "../layouts/AuthLayout";
 import { Page404 } from "../pages/Page404";
 import { Dashboard } from "../pages/Dashboard";
-import { SpeciesPage } from "../pages/SpeciesPage";
-import { FamiliesPage } from "../pages/FamiliesPage";
-import { AuthLayout } from "../layouts/AuthLayout";
 import { RegisterPage } from "../pages/RegisterPage";
 import { LoginPage } from "../pages/LoginPage";
 import { TestPage } from "../pages/TestPage";
+import { HomePage } from "../pages/HomePage";
+import { SpeciesPublicPage } from "../pages/SpeciesPublicPage";
+import { SpeciesPrivatePage } from "../pages/SpeciesPrivatePage";
+import { FamiliesPrivatePage } from "../pages/FamiliesPrivatePage";
 
 export const router = createBrowserRouter([
   {
@@ -19,22 +22,57 @@ export const router = createBrowserRouter([
   {
     // path: '/app',
     path: ROUTES.APP,
-    element: <DashboardLayout />,
     children: [
       {
         // path: '/app',
-        path: ROUTES.DASHBOARD,
-        element: <Dashboard />,
+        path: ROUTES.PUBLIC,
+        element: <PublicLayout />,
+        children: [
+          {
+            // path: '/app',
+            path: ROUTES.HOME,
+            element: <HomePage />,
+          },
+          {
+            // path: '/app/species',
+            path: ROUTES.SPECIES,
+            element: <SpeciesPublicPage />,
+          },
+          {
+            // Si no encuentro ninguna de las rutas anteriores entonces renderizo 404
+            // path: '/app/*',
+            path: ROUTES.ELSE,
+            element: <Page404 />,
+          },
+        ]
       },
       {
-        // path: '/app/family',
-        path: ROUTES.FAMILY,
-        element: <FamiliesPage />,
-      },
-      {
-        // path: '/app/especies',
-        path: ROUTES.SPECIES,
-        element: <SpeciesPage />,
+        // path: '/app/admin',
+        path: ROUTES.PRIVATE,
+        element: <PrivateLayout />,
+        children: [
+          {
+            // path: '/app/admin',
+            path: ROUTES.DASHBOARD,
+            element: <Dashboard />,
+          },
+          {
+            // path: '/app/admin/family',
+            path: ROUTES.FAMILY,
+            element: <FamiliesPrivatePage />,
+          },
+          {
+            // path: '/app/admin/species',
+            path: ROUTES.SPECIES,
+            element: <SpeciesPrivatePage />,
+          },
+          {
+            // Si no encuentro ninguna de las rutas anteriores entonces renderizo 404
+            // path: '/app/admin/*',
+            path: ROUTES.ELSE,
+            element: <Page404 />,
+          },
+        ]
       },
       {
         // Si no encuentro ninguna de las rutas anteriores entonces renderizo 404

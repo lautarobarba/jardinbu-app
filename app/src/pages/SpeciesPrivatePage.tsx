@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { PageSubTitle } from "../components/PageSubTitle";
 import { PageTitle } from "../components/PageTitle";
 // import { useQuery } from "@tanstack/react-query";
@@ -14,7 +15,7 @@ interface Species {
   deleted: boolean;
 }
 
-export const SpeciesPage = () => {
+export const SpeciesPrivatePage = () => {
   // Queries
   // const { isLoading, isError, data, error } = useQuery<Species[]>(
   //   ["species"],
@@ -36,8 +37,9 @@ export const SpeciesPage = () => {
 
   return (
     <>
-      <PageTitle title="Especies" />
-      <PageSubTitle title="Listado" />
+      <PageTitle title="Especies (vista privada)" />
+      <p><Link to={"/app/admin"}>Volver al Dashboard</Link></p>
+      <PageSubTitle title="Listado de especies" />
 {/* 
       {isLoading ? (
         <p>CARGANDO...</p>

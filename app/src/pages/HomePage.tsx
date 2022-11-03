@@ -5,7 +5,7 @@ import { useAppSelector } from "../redux/hooks";
 import { selectCurrentUser } from "../features/auth/authSlice";
 import { useEffect } from "react";
 
-export const Dashboard = () => {
+export const HomePage = () => {
 
   // Recupero la session actual de la storage 
   //  para saber si el usuario esta autenticado
@@ -25,18 +25,12 @@ export const Dashboard = () => {
   return (
     <>
       <PageTitle title="Biblioteca del Bosque" />
-      <PageSubTitle title="Dashboard - INICIO PRIVADO" className="w-100 text-center" />
+      <PageSubTitle title="INICIO PÚBLICO" className="w-100 text-center" />
 
-      <p>Aca va algo de información...</p>
+      <p>Vistas públicas para visitantes</p>
       <ul>
         <li>
-          <Link to={"/app/admin/family"}>Familias</Link>
-        </li>
-        <li>
-          <Link to={"/app/admin/genus"}>Géneros</Link>
-        </li>
-        <li>
-          <Link to={"/app/admin/species"}>Especies</Link>
+          <Link to={"/app/species"}>Especies</Link>
         </li>
       </ul>
       <hr />

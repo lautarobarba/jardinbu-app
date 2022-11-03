@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { NavBar } from "../components/NavBar";
 import { SideBar } from "../components/SideBar";
 
-export const DashboardLayout = () => {
+export const PrivateLayout = () => {
   const getSideBarLastState = () => {
     const sideBarData: string | null = localStorage.getItem("sidebar");
     if (sideBarData) {
@@ -35,6 +35,7 @@ export const DashboardLayout = () => {
       />
       <div>
         <div id="nav-bar-spacer" className="" style={{ height: "65px" }}></div>
+        <p>DASHBOARD LAYOUT</p>
         <Outlet />
       </div>
     </>

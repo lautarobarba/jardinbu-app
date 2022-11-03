@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Family } from "../interfaces/Family";
 import { Link } from "react-router-dom";
 
-export const FamiliesPage = () => {
+export const FamiliesPrivatePage = () => {
   // Queries
   // const { isLoading, isError, data, error } = useQuery<Family[]>(
   //   ["families"],
@@ -33,8 +33,8 @@ export const FamiliesPage = () => {
 
   return (
     <>
-      <PageTitle title="Familias" />
-      <Link to="/app">Volver</Link>
+      <PageTitle title="Familias (vista privada)" />
+      <Link to="/app/admin">Volver al Dashboard</Link>
       <PageSubTitle title="Listado de familias" />
 
       {/* {isLoading ? (
