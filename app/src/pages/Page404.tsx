@@ -18,10 +18,11 @@ export const Page404 = () => {
         className="w-100 text-center"
         style={{ height: "200px" }}
       />
-      <PageTitle title="Error 404" />
+      <PageTitle title="Error 404 (REACTAPP)" />
       <PageSubTitle className="text-center" title="Página no encontrada" />
-      <div className="w-100 d-flex justify-content-center">
-        <Link to={"/app"}>Volver al Dashboard</Link>
+      <div className="w-100 text-center">
+        <p><Link to={"/app/admin"}>Volver al Dashboard</Link></p>
+        <p><Link to={"/app"}>Volver al Inicio</Link></p>
       </div>
     </>
   );
