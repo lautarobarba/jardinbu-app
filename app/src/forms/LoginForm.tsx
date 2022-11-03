@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { FormikHelpers, useFormik } from 'formik';
 import { TextField } from '@mui/material';
 import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { LoginUserDto } from '../interfaces/LoginUserDto';
 import Axios from 'axios';
 import { SessionDto } from '../interfaces/SessionDto';
@@ -31,11 +31,21 @@ export const LoginForm = () => {
   // Recupero la session actual de la storage 
   //  para saber si el usuario esta autenticado
   const logueado = useAppSelector(selectCurrentSession);
-  
+  const location = useLocation();
+
+  // if(logueado){
+  //   return (<Navigate to="/app/admin" replace state={{ location }}/>); 
+  // }
+
+  // const redirectToDashboard = () => {
+    // return (<Navigate to="/app/admin" replace state={{ location }}/>); 
+  // }
+
   useEffect(() => {
     if(logueado){
       console.log({ mess: 'USER LOGUEADO' });
       console.log(logueado);
+
     } else {
       console.log({ mess: 'USER NO LOGUEADO' });
       console.log(logueado);
@@ -143,6 +153,12 @@ export const LoginForm = () => {
     dispatch, 
     session
   ]);
+
+  
+  // Si el usuario esta logueado lo redirecciono al dashboard
+  if(logueado){
+    return (<Navigate to="/app/admin" replace state={{ location }}/>); 
+  }
 
 	return (
     <form onSubmit={formik.handleSubmit}>

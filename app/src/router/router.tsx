@@ -12,6 +12,7 @@ import { HomePage } from "../pages/HomePage";
 import { SpeciesPublicPage } from "../pages/SpeciesPublicPage";
 import { SpeciesPrivatePage } from "../pages/SpeciesPrivatePage";
 import { FamiliesPrivatePage } from "../pages/FamiliesPrivatePage";
+import { LogoutPage } from "../pages/LogoutPage";
 
 export const router = createBrowserRouter([
   {
@@ -96,6 +97,11 @@ export const router = createBrowserRouter([
         // path: '/app/auth/login',
         path: ROUTES.LOGIN,
         element: <LoginPage />,
+      },
+      {
+        // path: '/app/auth/logout',
+        path: ROUTES.LOGOUT,
+        element: <LogoutPage />,
       },
       {
         // Si no encuentro ninguna de las rutas anteriores entonces renderizo 404

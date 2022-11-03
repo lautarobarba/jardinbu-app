@@ -17,6 +17,7 @@ export const ROUTES = {
   AUTH: "/app/auth",
   REGISTER: "register",
   LOGIN: "login",
+  LOGOUT: "logout",
 
   // 404 Error
   ELSE: "*",

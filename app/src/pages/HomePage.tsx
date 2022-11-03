@@ -34,8 +34,7 @@ export const HomePage = () => {
         </li>
       </ul>
       <hr />
-      <PageSubTitle title="Autenticación" />
-      <p>Aca va la autenticación...</p>
+      <PageSubTitle title="Testeando Autenticación.." />
       <ul>
         <li>
           <Link to={"/app/auth/register"}>Registro</Link>
@@ -44,12 +43,15 @@ export const HomePage = () => {
           <Link to={"/app/auth/login"}>Login</Link>
         </li>
       </ul>
-      <hr />
-      <PageSubTitle title="Testeando login.." />
       { user ? (
         <>
           <p>Usuario logueado: {user.firstname} {user.lastname}</p>
-          <button>salir</button>
+          <Link 
+            to={"/app/auth/logout"} 
+            className="btn bg-dark text-white"
+          >
+            SALIR
+          </Link>
         </>
       ):(
         <p>No hay usuario logueado</p>

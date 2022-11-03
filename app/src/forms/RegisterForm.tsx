@@ -3,11 +3,13 @@ import * as Yup from 'yup';
 import { FormikHelpers, useFormik } from 'formik';
 import { TextField } from '@mui/material';
 import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import Axios from 'axios';
 import { CreateUserDto } from '../interfaces/CreateUserDto';
 import { useGetAuthUser, useRegisterUser } from "../api/hooks";
 import { SessionDto } from "../interfaces/SessionDto";
+import { useAppSelector } from "../redux/hooks";
+import { selectCurrentSession } from "../features/auth/authSlice";
 
 const ValidationSchema = Yup.object().shape({
   email: Yup.string().email("El email no es válido")
@@ -40,6 +42,11 @@ interface Values {
 }
 
 export const RegisterForm = () => {
+  
+  // Recupero la session actual de la storage 
+  //  para saber si el usuario esta autenticado
+  const logueado = useAppSelector(selectCurrentSession);
+  const location = useLocation();
 
   const { 
     mutate: registerMutate,
@@ -128,6 +135,11 @@ export const RegisterForm = () => {
       token: userToken,
       user: getAuthUserData
     });
+  }
+
+  // Si el usuario esta logueado lo redirecciono al dashboard
+  if(logueado){
+    return (<Navigate to="/app/admin" replace state={{ location }}/>); 
   }
 
 	return (
