@@ -30,18 +30,20 @@ export const LogoutPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    logoutMutate(null! ,{
-      onError: (error) => {
-        // Esto solo lo uso para imprimir los errores en consola.
-        if(Axios.isAxiosError(error)){
-          console.log({
-            error: error.response?.status,
-            mensaje: error.response?.data.message
-          });
-        }
-      },
-    });
-  }, [logoutMutate, dispatch]);
+    if(logueado){
+      logoutMutate(null! ,{
+        onError: (error) => {
+          // Esto solo lo uso para imprimir los errores en consola.
+          if(Axios.isAxiosError(error)){
+            console.log({
+              error: error.response?.status,
+              mensaje: error.response?.data.message
+            });
+          }
+        },
+      });
+    }
+  }, [logueado, logoutMutate, dispatch]);
 
   useEffect(() => {
     if(logoutIsSuccess || logoutIsError){
