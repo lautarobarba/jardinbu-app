@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { NavBar } from "../components/NavBar";
+import { PrivateNavBar } from "../components/PrivateNavBar";
 import { SideBar } from "../components/SideBar";
 import { selectCurrentSession } from "../features/auth/authSlice";
 import { useAppSelector } from "../redux/hooks";
@@ -38,7 +38,7 @@ export const PrivateLayout = () => {
 
   return (
     <>
-      <NavBar
+      <PrivateNavBar
         handleSideBarChange={handleSideBarChange}
         drawerWidth={DRAWERWIDTH}
       />

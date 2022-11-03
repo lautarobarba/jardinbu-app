@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { NavBar } from "../components/NavBar";
+import { PublicNavBar } from "../components/PublicNavBar";
 import { SideBar } from "../components/SideBar";
 
 export const PublicLayout = () => {
@@ -24,7 +24,7 @@ export const PublicLayout = () => {
 
   return (
     <>
-      <NavBar
+      <PublicNavBar
         handleSideBarChange={handleSideBarChange}
         drawerWidth={DRAWERWIDTH}
       />

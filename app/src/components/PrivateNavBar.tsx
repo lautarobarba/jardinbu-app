@@ -21,7 +21,7 @@ interface Props {
   drawerWidth: number;
 }
 
-export const NavBar = (props: Props) => {
+export const PrivateNavBar = (props: Props) => {
   const { handleSideBarChange, drawerWidth } = props;
 
   return (
@@ -29,7 +29,7 @@ export const NavBar = (props: Props) => {
       <div className="container-fluid">
         <div className="w-100 d-flex justify-content-between">
           <MDBNavbarBrand className="text-white" href="/app">
-            JBU
+            Biblioteca del Bosque
           </MDBNavbarBrand>
           <MDBNavbarBrand className="text-white">Avatar</MDBNavbarBrand>
         </div>

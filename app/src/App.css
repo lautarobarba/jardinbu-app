@@ -1,3 +1,53 @@
+:root {
+  /* Colores */
+  --primary: #3b71ca;
+  --secondary: #9fa6b2;
+  --success: #14a44d;
+  --danger: #dc4c64;
+  --warning: #e4a11b;
+  --dark: #332d2d;
+  /* Bearkpoints */
+  --desktop-screen: 900px;
+}
+
+.navbar {
+  min-height: 64px;
+  padding-left: 24px;
+  padding-right: 24px;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  background-color: var(--primary);
+  box-shadow: rgb(0 0 0 / 20%) 0px 2px 4px -1px,
+    rgb(0 0 0 / 14%) 0px 4px 5px 0px, rgb(0 0 0 / 12%) 0px 1px 10px 0px;
+}
+
+@media screen and (min-width: var(--desktop-screen)) {
+  .navbar {
+    background-color: var(--warning);
+  }
+}
+
+.brand {
+  min-height: 54px;
+}
+
+#home {
+  background-color: #00ff0050;
+}
+
+#about {
+  background-color: #0000ff50;
+}
+
+#map {
+  background-color: #ff000050;
+}
+
+.navbar-spacer {
+  min-height: 100px;
+}
+
 h1 {
 	font-size: 1.5em;
 	font-family: 'Merriweather Sans', sans-serif;
@@ -18,4 +68,9 @@ h2 {
 
 .text-dark {
 	color: #1b1b1b;
+}
+
+.custom-link {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.25rem;
 }
