@@ -21,7 +21,7 @@ export const PublicNavBar = (props: Props) => {
   const [showNav, setShowNav] = useState<boolean>(true);
 
   return (
-    <MDBNavbar expand='lg' className="navbar fixed-top navbar-expand-md bg-dark">
+    <MDBNavbar expand='md' className="navbar fixed-top navbar-expand-md bg-dark">
       <MDBContainer fluid>
           <MDBNavbarBrand className="text-white" href="/app">
             Biblioteca del Bosque
@@ -53,7 +53,7 @@ export const PublicNavBar = (props: Props) => {
                 <Link to={"/app/auth/login"} className="nav-link text-white custom-link" style={{ padding: 0 }}>
                   <MDBBtn
                     type="button" 
-                    className="btn btn-primary bg-light custom-link w-100 w-md-auto text-dark" 
+                    className="btn btn-bg-primary custom-link w-100 w-md-auto" 
                     style={{ textTransform: 'none', padding: '8px', marginTop: 'auto' }}
                   >
                     Ingresar

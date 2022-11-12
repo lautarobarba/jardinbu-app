@@ -13,6 +13,7 @@ export const useRegisterUser = (config?: any) => {
 }
 
 export const useLogin = (config?: any) => {
+	// TODO: hay que actualizar la info en el authSlice
 	return useMutation(login, config);
 }
 
