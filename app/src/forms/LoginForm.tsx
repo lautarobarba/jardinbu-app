@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 import * as Yup from 'yup';
 import { FormikHelpers, useFormik } from 'formik';
 import { TextField } from '@mui/material';
-import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { MDBBtn } from 'mdb-react-ui-kit';
+import { Link } from "react-router-dom";
 import { LoginUserDto } from '../interfaces/LoginUserDto';
 import Axios from 'axios';
 import { SessionDto } from '../interfaces/SessionDto';
 import { useGetAuthUser, useLogin } from '../api/hooks';
-import { useAppSelector, useAppDispatch } from '../redux/hooks'
-import { selectCurrentSession, setCredentials } from "../features/auth/authSlice";
-
+import { useAppDispatch } from '../redux/hooks'
+import { setCredentials } from "../features/auth/authSlice";
 
 const ValidationSchema = Yup.object().shape({
   email: Yup.string().email("El email no es válido")
@@ -28,30 +27,6 @@ interface Values {
 
 export const LoginForm = () => {
 
-  // Recupero la session actual de la storage 
-  //  para saber si el usuario esta autenticado
-  const logueado = useAppSelector(selectCurrentSession);
-  const location = useLocation();
-
-  // if(logueado){
-  //   return (<Navigate to="/app/admin" replace state={{ location }}/>); 
-  // }
-
-  // const redirectToDashboard = () => {
-    // return (<Navigate to="/app/admin" replace state={{ location }}/>); 
-  // }
-
-  useEffect(() => {
-    if(logueado){
-      console.log({ mess: 'USER LOGUEADO' });
-      console.log(logueado);
-
-    } else {
-      console.log({ mess: 'USER NO LOGUEADO' });
-      console.log(logueado);
-    }
-  }, [logueado]);
-
   const { 
     mutate: loginMutate,
     isLoading: loginIsLoading,
@@ -60,7 +35,6 @@ export const LoginForm = () => {
     // error: loginError
   } = useLogin();
 
-  // const [ userToken, setUserToken ] = useState<string>('');
   const [ session, setSession ] = useState<SessionDto>({accessToken: '', refreshToken: ''});
 
   const {
@@ -71,10 +45,7 @@ export const LoginForm = () => {
     // error: getAuthUserError 
   // } = useGetAuthUser(session?.accessToken ,{
   } = useGetAuthUser(session.accessToken, {
-    enabled: loginIsSuccess,
-    onSuccess: () => {
-
-    }
+    enabled: loginIsSuccess
   });
 
   const dispatch = useAppDispatch();
@@ -134,12 +105,12 @@ export const LoginForm = () => {
 
   useEffect(() => {
     if (loginIsSuccess && getAuthUserIsSuccess) {
-      console.log('Actualizar REDUX userSlice')
-      console.log({
-        status: 'SUCCESS',
-        user: getAuthUserData,
-        session: session
-      });
+      // console.log('Actualizar REDUX userSlice')
+      // console.log({
+      //   status: 'SUCCESS',
+      //   user: getAuthUserData,
+      //   session: session
+      // });
   
       dispatch(setCredentials({
         user: getAuthUserData,
@@ -153,12 +124,6 @@ export const LoginForm = () => {
     dispatch, 
     session
   ]);
-
-  
-  // Si el usuario esta logueado lo redirecciono al dashboard
-  if(logueado){
-    return (<Navigate to="/app/admin" replace state={{ location }}/>); 
-  }
 
 	return (
     <form onSubmit={formik.handleSubmit}>
@@ -208,8 +173,7 @@ export const LoginForm = () => {
 			<div className="">
         <div>
 				<Link 
-          // to={"/app/auth/recover-password"} 
-          to={"#"} 
+          to={"/app/auth/recover-password"} 
           className="text-dark"
         >
           ¿Olvidaste tu contraseña?

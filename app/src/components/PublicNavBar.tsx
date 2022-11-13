@@ -12,12 +12,7 @@ import {
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-interface Props {
-  handleSideBarChange: Function;
-  drawerWidth: number;
-}
-
-export const PublicNavBar = (props: Props) => {
+export const PublicNavBar = () => {
   const [showNav, setShowNav] = useState<boolean>(true);
 
   return (

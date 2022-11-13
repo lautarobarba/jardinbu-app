@@ -1,38 +1,22 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { PublicNavBar } from "../components/PublicNavBar";
 import { SideBar } from "../components/SideBar";
+import { useUserIsAuthenticated } from "../features/auth/authHooks";
 
 export const PublicLayout = () => {
-  const getSideBarLastState = () => {
-    const sideBarData: string | null = localStorage.getItem("sidebar");
-    if (sideBarData) {
-      const sideBar: boolean = Boolean(JSON.parse(sideBarData));
-      return sideBar;
-    }
-    return false;
-  };
 
-  const [menuState, setMenuState] = useState<boolean>(getSideBarLastState());
-
-  const DRAWERWIDTH: number = 240;
-
-  const handleSideBarChange = (state: boolean) => {
-    setMenuState(state);
-    localStorage.setItem("sidebar", JSON.stringify(state));
-  };
+  // Redirecciono si el usuario ya esta autenticado
+  const isAuthenticated = useUserIsAuthenticated();
+  const location = useLocation();
+  
+  if(isAuthenticated){
+    return (<Navigate to="/app/admin" replace state={{ location }}/>); 
+  }
 
   return (
     <>
-      <PublicNavBar
-        handleSideBarChange={handleSideBarChange}
-        drawerWidth={DRAWERWIDTH}
-      />
-      <SideBar
-        handleSideBarChange={handleSideBarChange}
-        drawerWidth={DRAWERWIDTH}
-        menuState={menuState}
-      />
+      <PublicNavBar />
       <div>
         <div id="nav-bar-spacer" className="" style={{ height: "65px" }}></div>
         <p>PUBLIC LAYOUT</p>

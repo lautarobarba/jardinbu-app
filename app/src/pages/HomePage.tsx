@@ -4,23 +4,11 @@ import { Link } from "react-router-dom";
 import { useAppSelector } from "../redux/hooks";
 import { selectCurrentUser } from "../features/auth/authSlice";
 import { useEffect } from "react";
+import { useCurrentUser } from "../features/auth/authHooks";
 
 export const HomePage = () => {
 
-  // Recupero la session actual de la storage 
-  //  para saber si el usuario esta autenticado
-  const user = useAppSelector(selectCurrentUser);
-  
-  useEffect(() => {
-    if(user){
-      console.log({ mess: 'USER LOGUEADO' });
-      console.log(user);
-    } else {
-      console.log({ mess: 'USER NO LOGUEADO' });
-      console.log(user);
-    }
-  }, [user]);
-
+  const user = useCurrentUser();
 
   return (
     <>

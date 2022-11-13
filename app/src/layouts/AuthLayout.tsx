@@ -1,8 +1,18 @@
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import RegistrationImage from '../assets/images/registration.svg';
 import { Footer } from "../components/Footer";
+import { useUserIsAuthenticated } from "../features/auth/authHooks";
 
 export const AuthLayout = () => {
+
+  // Redirecciono si el usuario ya esta autenticado
+  const isAuthenticated = useUserIsAuthenticated();
+  const location = useLocation();
+  
+  if(isAuthenticated){
+    return (<Navigate to="/app/admin" replace state={{ location }}/>); 
+  }
+
   return (
     <>
       <section 

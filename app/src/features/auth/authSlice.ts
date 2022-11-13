@@ -19,7 +19,7 @@ export const authSlice = createSlice({
 	initialState: initialState,
 	reducers: {
 		setCredentials: (state, action) => {
-			// console.log('Guardar credenciales en localstorage.')
+			console.log('Guardar credenciales en localstorage.')
 			const { user, session } = action.payload;
 			state.user = user;
 			state.session = session;
@@ -27,7 +27,7 @@ export const authSlice = createSlice({
 			localStorage.setItem('session', JSON.stringify(session));
 		},
 		removeCredentials: (state) => {
-			// console.log('Eliminar credenciales en localstorage.')
+			console.log('Eliminar credenciales en localstorage.')
 			state.user = null;
 			state.session = null;
 			localStorage.removeItem('user');

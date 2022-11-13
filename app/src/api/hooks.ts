@@ -8,7 +8,7 @@ import {
 
 
 // Mutations hooks
-export const useRegisterUser = (config?: any) => {
+export const useRegister = (config?: any) => {
 	return useMutation(registerUser, config);
 }
 

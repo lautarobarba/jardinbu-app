@@ -2,17 +2,14 @@ import { useState } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { PrivateNavBar } from "../components/PrivateNavBar";
 import { SideBar } from "../components/SideBar";
-import { selectCurrentSession } from "../features/auth/authSlice";
-import { useAppSelector } from "../redux/hooks";
+import { useUserIsAuthenticated } from "../features/auth/authHooks";
 
 export const PrivateLayout = () => {
 
-  // Recupero la session actual de la storage 
-  //  para saber si el usuario esta autenticado
-  const logueado = useAppSelector(selectCurrentSession);
+  // Redirecciono si el usuario ya esta autenticado
+  const isAuthenticated = useUserIsAuthenticated();
   const location = useLocation();
-
-
+  
   const getSideBarLastState = () => {
     const sideBarData: string | null = localStorage.getItem("sidebar");
     if (sideBarData) {
@@ -31,8 +28,7 @@ export const PrivateLayout = () => {
     localStorage.setItem("sidebar", JSON.stringify(state));
   };
 
-  // Si el usuario esta logueado lo redirecciono al dashboard
-  if(!logueado){
+  if(!isAuthenticated){
     return (<Navigate to="/app/auth/login" replace state={{ location }}/>); 
   }
 

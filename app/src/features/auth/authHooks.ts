@@ -1,13 +1,23 @@
-import { useState } from "react";
 import { useAppSelector } from "../../redux/hooks";
-import { selectCurrentSession } from "./authSlice";
+import { selectCurrentSession, selectCurrentUser } from "./authSlice";
 
-export const useUserIsLogin = () => {
-	const [isLogin, setIsLogin] = useState<boolean>(false);
-	const logueado = useAppSelector(selectCurrentSession);
+export const useUserIsAuthenticated = () => {
+	const session = useAppSelector(selectCurrentSession);
+	const isAuthenticated = session ? true : false;
+	return isAuthenticated;
+}
 
+export const useCurrentUser = () => {
+	const user = useAppSelector(selectCurrentUser);
+	return user;
 }
 
 export const useUserRole = () => {
+	const user = useAppSelector(selectCurrentUser);
+	return user?.role;
+}
 
+export const useJwtToken = () => {
+	const session = useAppSelector(selectCurrentSession);
+	return session?.accessToken;
 }

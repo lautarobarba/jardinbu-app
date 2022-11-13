@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import * as Yup from 'yup';
 import { FormikHelpers, useFormik } from 'formik';
 import { TextField } from '@mui/material';
-import { MDBBtn, MDBInput } from 'mdb-react-ui-kit';
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { MDBBtn } from 'mdb-react-ui-kit';
+import { Link } from "react-router-dom";
 import Axios from 'axios';
 import { CreateUserDto } from '../interfaces/CreateUserDto';
-import { useGetAuthUser, useRegisterUser } from "../api/hooks";
+import { useGetAuthUser, useRegister } from "../api/hooks";
 import { SessionDto } from "../interfaces/SessionDto";
-import { useAppSelector } from "../redux/hooks";
-import { selectCurrentSession } from "../features/auth/authSlice";
+import { useAppDispatch } from "../redux/hooks";
+import { setCredentials } from "../features/auth/authSlice";
 
 const ValidationSchema = Yup.object().shape({
   email: Yup.string().email("El email no es válido")
@@ -42,11 +42,6 @@ interface Values {
 }
 
 export const RegisterForm = () => {
-  
-  // Recupero la session actual de la storage 
-  //  para saber si el usuario esta autenticado
-  const logueado = useAppSelector(selectCurrentSession);
-  const location = useLocation();
 
   const { 
     mutate: registerMutate,
@@ -54,19 +49,22 @@ export const RegisterForm = () => {
     isSuccess: registerIsSuccess,
     // isError: registerIsError,
     // error: registerError
-  } = useRegisterUser();
+  } = useRegister();
 
-  const [ userToken, setUserToken ] = useState<string>('');
+  const [ session, setSession ] = useState<SessionDto>({accessToken: '', refreshToken: ''});
 
-  const {     
+  const {
     // isLoading: getAuthUserIsLoading,
     data: getAuthUserData,
-    // isSuccess: getAuthUserIsSuccess,
+    isSuccess: getAuthUserIsSuccess,
     // isError: getAuthUserIsError,
     // error: getAuthUserError 
-  } = useGetAuthUser(userToken ,{
+  // } = useGetAuthUser(session?.accessToken ,{
+  } = useGetAuthUser(session.accessToken, {
     enabled: registerIsSuccess
   });
+
+  const dispatch = useAppDispatch();
 
 	const formik = useFormik({
     initialValues: {
@@ -120,27 +118,35 @@ export const RegisterForm = () => {
             }
           }
         },
-        onSuccess: (tokens: SessionDto) => {
-          console.log(tokens);
-          setUserToken(tokens.accessToken);
+        onSuccess: (session: SessionDto) => {
+          console.log(session);
+          setSession(session);
         }
       });
     },
   });
 
-  if (registerIsSuccess){
-    console.log('Actualizar REDUX userSlice')
-    console.log({
-      status: 'SUCCESS',
-      token: userToken,
-      user: getAuthUserData
-    });
-  }
-
-  // Si el usuario esta logueado lo redirecciono al dashboard
-  if(logueado){
-    return (<Navigate to="/app/admin" replace state={{ location }}/>); 
-  }
+  useEffect(() => {
+    if (registerIsSuccess && getAuthUserIsSuccess) {
+      // console.log('Actualizar REDUX userSlice')
+      // console.log({
+      //   status: 'SUCCESS',
+      //   user: getAuthUserData,
+      //   session: session
+      // });
+  
+      dispatch(setCredentials({
+        user: getAuthUserData,
+        session: session
+      }));
+    }
+  }, [
+    registerIsSuccess, 
+    getAuthUserIsSuccess, 
+    getAuthUserData, 
+    dispatch, 
+    session
+  ]);
 
 	return (
     <form onSubmit={formik.handleSubmit}>
