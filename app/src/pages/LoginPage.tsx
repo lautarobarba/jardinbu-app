@@ -1,10 +1,19 @@
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { PageSubTitle } from "../components/PageSubTitle";
 import { PageTitle } from "../components/PageTitle";
+import { useUserIsAuthenticated } from "../features/auth/authHooks";
 import { LoginForm } from "../forms/LoginForm";
 
 export const LoginPage = () => {
+
+  // Redirecciono si el usuario ya esta autenticado
+  const isAuthenticated = useUserIsAuthenticated();
+  const location = useLocation();
+  
+  if(isAuthenticated){
+    return (<Navigate to="/app/admin" replace state={{ location }}/>); 
+  }
 
   return (
     <>

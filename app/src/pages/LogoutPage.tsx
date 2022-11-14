@@ -1,23 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Navigate, useLocation } from "react-router";
 import { useLogout } from "../api/hooks";
 import { PageSubTitle } from "../components/PageSubTitle";
 import { PageTitle } from "../components/PageTitle";
 import { removeCredentials, selectCurrentSession } from "../features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useAppDispatch } from "../redux/hooks";
+import { useJwtToken, useUserIsAuthenticated } from "../features/auth/authHooks";
 import Axios from 'axios';
 
 
 export const LogoutPage = () => {
-
-  // Recupero la session actual de la storage 
-  //  para saber si el usuario esta autenticado
-  const logueado = useAppSelector(selectCurrentSession);
+  const isAuthenticated = useUserIsAuthenticated();
+  const jwtToken = useJwtToken();
   const location = useLocation();
-
-  // const [ logoutComplete, setSession ] = useState<booelean>(false);
-
 
   const { 
     mutate: logoutMutate,
@@ -25,13 +21,13 @@ export const LogoutPage = () => {
     isSuccess: logoutIsSuccess,
     isError: logoutIsError,
     // error: logoutError
-  } = useLogout(logueado?.accessToken ?? '');
+  } = useLogout();
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if(logueado){
-      logoutMutate(null! ,{
+    if(isAuthenticated && jwtToken){
+      logoutMutate(jwtToken ,{
         onError: (error) => {
           // Esto solo lo uso para imprimir los errores en consola.
           if(Axios.isAxiosError(error)){
@@ -43,20 +39,19 @@ export const LogoutPage = () => {
         },
       });
     }
-  }, [logueado, logoutMutate, dispatch]);
+  }, [isAuthenticated, jwtToken]);
+  // }, [isAuthenticated, logoutMutate, dispatch]);
 
   useEffect(() => {
     if(logoutIsSuccess || logoutIsError){
       dispatch(removeCredentials());
     }
   }, [logoutIsSuccess,  logoutIsError, dispatch]);
-
-
-  // Si el usuario esta logueado lo redirecciono al dashboard
-  if(!logueado){
-    return (<Navigate to="/app/admin" replace state={{ location }}/>); 
+  
+  if(!isAuthenticated){
+    return (<Navigate to="/app" replace state={{ location }}/>); 
   }
-    
+
   return (
     <>
       {/* Título de la página */}

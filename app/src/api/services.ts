@@ -29,7 +29,7 @@ export const login = async (loginUserDto: LoginUserDto): Promise<SessionDto> => 
 }
 
 export const logout = async (token: string): Promise<void> => {
-  return axiosClient.post('auth/logout',
+  return axiosClient.post('auth/logout', null,
     { headers: { Authorization: `Bearer ${token}` } }
   ).then(response => response.data);
 }

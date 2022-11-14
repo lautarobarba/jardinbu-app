@@ -13,12 +13,11 @@ export const useRegister = (config?: any) => {
 }
 
 export const useLogin = (config?: any) => {
-	// TODO: hay que actualizar la info en el authSlice
 	return useMutation(login, config);
 }
 
-export const useLogout = (token: string, config?: any) => {
-	return useMutation(() => logout(token), config);
+export const useLogout = (config?: any) => {
+	return useMutation(logout, config);
 }
 
 

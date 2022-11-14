@@ -34,7 +34,9 @@ export const PrivateNavBar = (props: Props) => {
           <MDBNavbarBrand className="text-white" href="/app/admin">
             Biblioteca del Bosque
           </MDBNavbarBrand>
-          <MDBNavbarBrand className="text-white">{user?.email}</MDBNavbarBrand>
+          <div style={{ cursor: 'pointer' }}>
+            <MDBNavbarBrand className="text-white">{user?.email}</MDBNavbarBrand>
+          </div>
         </div>
       </div>
     </MDBNavbar>
