@@ -39,8 +39,7 @@ export const LogoutPage = () => {
         },
       });
     }
-  }, [isAuthenticated, jwtToken]);
-  // }, [isAuthenticated, logoutMutate, dispatch]);
+  }, [isAuthenticated, jwtToken, logoutMutate]);
 
   useEffect(() => {
     if(logoutIsSuccess || logoutIsError){
