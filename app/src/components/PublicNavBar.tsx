@@ -36,7 +36,7 @@ export const PublicNavBar = () => {
                 <Link to={"/app"} className="nav-link text-white custom-link">Inicio</Link>
               </MDBNavbarItem>
               <MDBNavbarItem className="nav-item text-center">
-                <Link to={"/app/blog"} className="nav-link text-white custom-link">Blog</Link>
+                <Link to={"/app"} className="nav-link text-white custom-link">Blog</Link>
               </MDBNavbarItem>
               <MDBNavbarItem className="nav-item text-center">
                 <Link to={"/app/species"} className="nav-link text-white custom-link">Especies</Link>

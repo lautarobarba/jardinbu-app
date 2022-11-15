@@ -1,49 +1,26 @@
 import { PageSubTitle } from "../components/PageSubTitle";
 import { PageTitle } from "../components/PageTitle";
-import { Link } from "react-router-dom";
-import { useAppSelector } from "../redux/hooks";
-import { selectCurrentUser } from "../features/auth/authSlice";
-import { useEffect } from "react";
-import { useCurrentUser } from "../features/auth/authHooks";
+import { Post } from "../components/Post";
+
 
 export const HomePage = () => {
 
-  const user = useCurrentUser();
+  const posts: any = [
+    { title: 'post1', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},
+    { title: 'post2', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},
+    { title: 'post3', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},
+    { title: 'post4', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},
+    { title: 'post5', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'},
+  ]
 
   return (
     <>
       <PageTitle title="Biblioteca del Bosque" />
       <PageSubTitle title="INICIO PÚBLICO" className="w-100 text-center" />
 
-      <p>Vistas públicas para visitantes</p>
-      <ul>
-        <li>
-          <Link to={"/app/species"}>Especies</Link>
-        </li>
-      </ul>
-      <hr />
-      <PageSubTitle title="Testeando Autenticación.." />
-      <ul>
-        <li>
-          <Link to={"/app/auth/register"}>Registro</Link>
-        </li>
-        <li>
-          <Link to={"/app/auth/login"}>Login</Link>
-        </li>
-      </ul>
-      { user ? (
-        <>
-          <p>Usuario logueado: {user.firstname} {user.lastname}</p>
-          <Link 
-            to={"/app/auth/logout"} 
-            className="btn bg-dark text-white"
-          >
-            SALIR
-          </Link>
-        </>
-      ):(
-        <p>No hay usuario logueado</p>
-      )}
+      {posts.map( (p: any) => {
+        return (<Post key={p.title} title={p.title} content={p.content} />);
+      })}
     </>
   );
 };

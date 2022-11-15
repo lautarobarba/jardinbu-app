@@ -20,7 +20,7 @@ export const Page404 = () => {
   useEffect(() => {
     setTimeout(() => {
       handleRedirect();
-    }, 5000);
+    }, 3000);
   }, []);
 
   const handleRedirect = () => {
@@ -48,7 +48,7 @@ export const Page404 = () => {
         <p><Link to={"/app/admin"}>Volver al Dashboard</Link></p>
         <p><Link to={"/app"}>Volver al Inicio</Link></p>
         <br />
-        <p>Será redireccionado automáticamente en 5 segundos...</p>
+        <p>Será redireccionado automáticamente en 3 segundos...</p>
       </div>
     </>
   );
