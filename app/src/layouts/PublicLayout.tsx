@@ -18,7 +18,7 @@ export const PublicLayout = () => {
     <>
       <PublicNavBar />
       <div>
-        <div id="nav-bar-spacer" className="" style={{ height: "65px" }}></div>
+        <div id="navbar-spacer" className="" style={{ height: "65px" }}></div>
         {/* <p>PUBLIC LAYOUT</p> */}
         <Outlet />
       </div>

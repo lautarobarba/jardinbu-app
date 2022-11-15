@@ -45,10 +45,19 @@ export const PrivateLayout = () => {
         drawerWidth={DRAWERWIDTH}
         menuState={menuState}
       />
-      <div>
-        <div id="nav-bar-spacer" className="" style={{ height: "65px" }}></div>
-        {/* <p>DASHBOARD LAYOUT</p> */}
-        <Outlet />
+      <div className="d-flex flex-row">
+        <div 
+          id="sidebar-spacer" 
+          className="d-none d-md-block" 
+          style={{ backgroundColor: 'red', minWidth: menuState ? DRAWERWIDTH: 0, transitionDuration: '0.2s'}}
+        ></div>
+        <div className="w-100">
+          <div id="navbar-spacer" style={{ height: "65px" }}></div>
+          {/* <p>DASHBOARD LAYOUT</p> */}
+          <div className="container-fluid">
+            <Outlet />
+          </div>
+        </div>
       </div>
     </>
   );
