@@ -15,7 +15,7 @@ import { PageTitle } from "../components/PageTitle";
 //   deleted: boolean;
 // }
 
-export const SpeciesPublicPage = () => {
+export const SpecimensPublicPage = () => {
   // Queries
   // const { isLoading, isError, data, error } = useQuery<Species[]>(
   //   ["species"],
@@ -37,9 +37,9 @@ export const SpeciesPublicPage = () => {
 
   return (
     <>
-      <PageTitle title="Especies (vista pública)" />
+      <PageTitle title="Ejemplares (vista pública)" />
       <p><Link to={"/app"}>Volver al Inicio</Link></p>
-      <PageSubTitle title="Listado de especies" />
+      <PageSubTitle title="Listado de ejemplares" />
 {/* 
       {isLoading ? (
         <p>CARGANDO...</p>

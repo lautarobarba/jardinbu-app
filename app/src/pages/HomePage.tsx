@@ -1,3 +1,4 @@
+import { MDBBtn } from "mdb-react-ui-kit";
 import { PageSubTitle } from "../components/PageSubTitle";
 import { PageTitle } from "../components/PageTitle";
 import { Post } from "../components/Post";
@@ -17,6 +18,12 @@ export const HomePage = () => {
     <>
       <PageTitle title="Biblioteca del Bosque" />
       <PageSubTitle title="INICIO PÚBLICO" className="w-100 text-center" />
+
+      <div className="mb-2 d-flex justify-content-end" style={{ width: '90%', margin: 'auto' }}>
+        <MDBBtn type="button">
+          INICIAR RECORRIDO INTERACTIVO
+        </MDBBtn>
+      </div>
 
       {posts.map( (p: any) => {
         return (<Post key={p.title} title={p.title} content={p.content} />);

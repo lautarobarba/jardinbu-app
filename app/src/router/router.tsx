@@ -13,6 +13,7 @@ import { SpeciesPublicPage } from "../pages/SpeciesPublicPage";
 import { SpeciesPrivatePage } from "../pages/SpeciesPrivatePage";
 import { FamiliesPrivatePage } from "../pages/FamiliesPrivatePage";
 import { LogoutPage } from "../pages/LogoutPage";
+import { SpecimensPublicPage } from "../pages/SpecimensPublicPage";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,11 @@ export const router = createBrowserRouter([
             // path: '/app/species',
             path: ROUTES.SPECIES,
             element: <SpeciesPublicPage />,
+          },
+          {
+            // path: '/app/specimen',
+            path: ROUTES.SPECIMEN,
+            element: <SpecimensPublicPage />,
           },
           {
             // Si no encuentro ninguna de las rutas anteriores entonces renderizo 404

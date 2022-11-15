@@ -45,7 +45,7 @@ export const PrivateLayout = () => {
       />
       <div>
         <div id="nav-bar-spacer" className="" style={{ height: "65px" }}></div>
-        <p>DASHBOARD LAYOUT</p>
+        {/* <p>DASHBOARD LAYOUT</p> */}
         <Outlet />
       </div>
     </>

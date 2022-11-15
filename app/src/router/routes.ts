@@ -12,6 +12,7 @@ export const ROUTES = {
   // Common routes
   FAMILY: "family",
   SPECIES: "species",
+  SPECIMEN: "specimen",
 
   // Auth
   AUTH: "/app/auth",
