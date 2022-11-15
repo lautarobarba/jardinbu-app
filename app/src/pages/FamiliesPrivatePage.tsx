@@ -4,13 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 // import { getFamilies } from "../api/services";
 import { Family } from "../interfaces/Family";
 import { Link } from "react-router-dom";
+import { useGetFamilies } from "../api/hooks";
 
 export const FamiliesPrivatePage = () => {
   // Queries
-  // const { isLoading, isError, data, error } = useQuery<Family[]>(
-  //   ["families"],
-  //   getFamilies
-  // );
+  const { isLoading, isError, data, error } = useGetFamilies();
 
   // Mutations
   // const mutation = useMutation(postTodo, {
@@ -37,17 +35,23 @@ export const FamiliesPrivatePage = () => {
       <Link to="/app/admin">Volver al Dashboard</Link>
       <PageSubTitle title="Listado de familias" />
 
-      {/* {isLoading ? (
+      {isError && (<p>ERROR</p>)}
+
+      {isLoading ? (
         <p className="h4">Buscando...</p>
       ) : (
         <div className="families">
           <ul>
             {data.map((family: Family) => {
-              return <li key={family.id}>{`${family.id} - ${family.name}`}</li>;
+              return (
+                <li key={family.id}>
+                 {`${family.id}.${family.name}: ${family.description}`}
+                </li>
+              );
             })}
           </ul>
         </div>
-      )} */}
+      )}
     </>
   );
 };

@@ -46,6 +46,10 @@ export const getAuthUser = async (token: string): Promise<User> => {
 }
 
 // ## Families
+export const getFamilies = async (): Promise<User> => {
+  return axiosClient.get('family',
+  ).then(response => response.data);
+}
 
 // ## Genra
 

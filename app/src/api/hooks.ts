@@ -3,11 +3,14 @@ import {
 	registerUser,
 	login,
 	logout,
-	getAuthUser
+	getAuthUser,
+	getFamilies
 } from "./services";
 
 
-// Mutations hooks
+// Mutations hooks ------------------------------------------------------------
+
+// ## Users
 export const useRegister = (config?: any) => {
 	return useMutation(registerUser, config);
 }
@@ -21,9 +24,16 @@ export const useLogout = (config?: any) => {
 }
 
 
-// Queries hooks
+// Queries hooks --------------------------------------------
+
+// ## Users
 export const useGetAuthUser = (token: string, config?: Omit<UseQueryOptions<any, unknown, any, string[]>, 'queryKey' | 'queryFn'>) => {
 	return useQuery(['auth-user'], () => getAuthUser(token), config);
+}
+
+// ## Families
+export const useGetFamilies = (config?: Omit<UseQueryOptions<any, unknown, any, string[]>, 'queryKey' | 'queryFn'>) => {
+	return useQuery(['families'], getFamilies, config);
 }
 
 // use query de facu

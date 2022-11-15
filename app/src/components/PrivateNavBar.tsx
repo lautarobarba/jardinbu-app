@@ -1,7 +1,12 @@
 import {
+  MDBDropdown,
+  MDBDropdownItem,
+  MDBDropdownMenu,
+  MDBDropdownToggle,
   // MDBContainer,
   MDBNavbar,
   MDBNavbarBrand,
+  MDBNavbarItem,
   // MDBNavbarToggler,
   // MDBIcon,
   // MDBNavbarNav,
@@ -60,8 +65,9 @@ export const PrivateNavBar = (props: Props) => {
           </div>
 
           {/* Right side */}
-          <div style={{ cursor: 'pointer' }}>
-            <MDBNavbarBrand className="text-white">{user?.email}</MDBNavbarBrand>
+          <div style={{ cursor: 'pointer' }} className="d-flex flex-row">
+            <MDBNavbarBrand className="text-white d-none d-md-block">{user?.email}</MDBNavbarBrand>
+            <MDBNavbarBrand className="text-white d-block d-md-none">AVATAR</MDBNavbarBrand>
           </div>
         </div>
       {/* </div> */}
