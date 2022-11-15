@@ -6,7 +6,7 @@ import { useUserIsAuthenticated } from "../features/auth/authHooks";
 
 export const PrivateLayout = () => {
 
-  // Redirecciono si el usuario ya esta autenticado
+  // Redirecciono si el usuario no esta autenticado
   const isAuthenticated = useUserIsAuthenticated();
   const location = useLocation();
   
@@ -20,12 +20,14 @@ export const PrivateLayout = () => {
   };
 
   const [menuState, setMenuState] = useState<boolean>(getSideBarLastState());
+  // const [menuState, setMenuState] = useState<boolean>(true);
 
-  const DRAWERWIDTH: number = 240;
+  const DRAWERWIDTH: number = 250;
 
-  const handleSideBarChange = (state: boolean) => {
-    setMenuState(state);
-    localStorage.setItem("sidebar", JSON.stringify(state));
+  const toggleSideBar = () => {
+    const prevState = menuState;
+    setMenuState(!prevState);
+    localStorage.setItem("sidebar", JSON.stringify(!prevState));
   };
 
   if(!isAuthenticated){
@@ -35,11 +37,11 @@ export const PrivateLayout = () => {
   return (
     <>
       <PrivateNavBar
-        handleSideBarChange={handleSideBarChange}
+        toggleSideBar={toggleSideBar}
         drawerWidth={DRAWERWIDTH}
       />
       <SideBar
-        handleSideBarChange={handleSideBarChange}
+        toggleSideBar={toggleSideBar}
         drawerWidth={DRAWERWIDTH}
         menuState={menuState}
       />

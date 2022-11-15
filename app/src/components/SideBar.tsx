@@ -10,16 +10,18 @@ import {
   // AppBar,
   // Grid
 } from "@mui/material";
+import { MDBIcon, MDBNavbar, MDBNavbarBrand, MDBNavbarItem } from "mdb-react-ui-kit";
+import { Link } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 interface Props {
-  handleSideBarChange: Function;
+  toggleSideBar: Function;
   drawerWidth: number;
   menuState: boolean;
 }
 
 export const SideBar = (props: Props) => {
-  const { handleSideBarChange, drawerWidth, menuState } = props;
+  const { toggleSideBar, drawerWidth, menuState } = props;
 
   return (
     <Drawer
@@ -34,6 +36,30 @@ export const SideBar = (props: Props) => {
       variant="persistent"
       anchor="left"
       open={menuState}
-    ></Drawer>
+      id="sidebar"
+    >
+
+      {/* Brand */}
+      <MDBNavbar className="navbar navbar-expand-md bg-dark">
+        <div className="d-flex justify-content-between" style={{ width: drawerWidth }}>
+          <MDBNavbarBrand className="text-white" href="/app/admin">
+            Biblioteca
+          </MDBNavbarBrand>
+          <MDBIcon
+            icon='times' 
+            size='lg' 
+            className="text-white" 
+            style={{ marginTop: 'auto', marginBottom: 'auto' }} 
+            onClick={toggleSideBar}
+          />
+        </div>
+      </MDBNavbar>
+
+      {/* Enlaces */}
+      <Link className="nav-link custom-link" to={"/app/admin/family"} >Familias</Link>
+      <Link className="nav-link custom-link" to={"/app/admin/genus"}>Géneros</Link>
+      <Link className="nav-link custom-link" to={"/app/admin/species"}>Especies</Link>
+      <Link className="nav-link custom-link" to={"/app/specimen"} >Ejemplares</Link>
+    </Drawer>
   );
 };
