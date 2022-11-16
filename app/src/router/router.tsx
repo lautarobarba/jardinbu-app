@@ -14,6 +14,8 @@ import { SpeciesPrivatePage } from "../pages/SpeciesPrivatePage";
 import { FamiliesPrivatePage } from "../pages/FamiliesPrivatePage";
 import { LogoutPage } from "../pages/LogoutPage";
 import { SpecimensPublicPage } from "../pages/SpecimensPublicPage";
+import { EmailConfirmationRequiredPage } from "../pages/EmailConfirmationRequiredPage";
+import { ConfirmEmailPage } from "../pages/ConfirmEmailPage";
 
 export const router = createBrowserRouter([
   {
@@ -108,6 +110,17 @@ export const router = createBrowserRouter([
         // path: '/app/auth/logout',
         path: ROUTES.LOGOUT,
         element: <LogoutPage />,
+      },
+      {
+        // path: '/app/auth/email-confirmation-required',
+        path: ROUTES.CONFIRM_EMAIL_REQUIRED,
+        element: <EmailConfirmationRequiredPage />,
+      },
+      {
+        // path: '/app/auth/confirm-email/:token',
+        path: ROUTES.CONFIRM_EMAIL,
+        // loader: contactLoader,
+        element: <ConfirmEmailPage />,
       },
       {
         // Si no encuentro ninguna de las rutas anteriores entonces renderizo 404

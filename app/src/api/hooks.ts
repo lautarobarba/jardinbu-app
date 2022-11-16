@@ -4,7 +4,9 @@ import {
 	login,
 	logout,
 	getAuthUser,
-	getFamilies
+	getFamilies,
+	sendEmailConfirmationEmail,
+	confirmEmail
 } from "./services";
 
 
@@ -21,6 +23,14 @@ export const useLogin = (config?: any) => {
 
 export const useLogout = (config?: any) => {
 	return useMutation(logout, config);
+}
+
+export const useSendEmailConfirmationEmail = (config?: any) => {
+	return useMutation(sendEmailConfirmationEmail, config);
+}
+
+export const useConfirmEmail = (config?: any) => {
+	return useMutation(confirmEmail, config);
 }
 
 

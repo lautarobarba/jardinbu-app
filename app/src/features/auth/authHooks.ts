@@ -12,12 +12,21 @@ export const useCurrentUser = () => {
 	return user;
 }
 
+export const useCurrentSession = () => {
+	const session = useAppSelector(selectCurrentSession);
+	return session;
+}
+
 export const useUserRole = () => {
 	const user = useAppSelector(selectCurrentUser);
-	return user?.role;
+	if (user)
+		return user.role;
+	return null;
 }
 
 export const useJwtToken = () => {
 	const session = useAppSelector(selectCurrentSession);
-	return session?.accessToken;
+	if (session)
+		return session.accessToken;
+	return null;
 }

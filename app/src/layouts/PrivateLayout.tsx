@@ -2,13 +2,14 @@ import { useState } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { PrivateNavBar } from "../components/PrivateNavBar";
 import { SideBar } from "../components/SideBar";
-import { useUserIsAuthenticated } from "../features/auth/authHooks";
+import { useCurrentUser, useUserIsAuthenticated } from "../features/auth/authHooks";
 
 export const PrivateLayout = () => {
 
   // Redirecciono si el usuario no esta autenticado
   const isAuthenticated = useUserIsAuthenticated();
   const location = useLocation();
+  const user = useCurrentUser();
   
   const getSideBarLastState = () => {
     const sideBarData: string | null = localStorage.getItem("sidebar");
@@ -30,8 +31,14 @@ export const PrivateLayout = () => {
     localStorage.setItem("sidebar", JSON.stringify(!prevState));
   };
 
+  // Valido si el usuario esta autenticado
   if(!isAuthenticated){
     return (<Navigate to="/app/auth/login" replace state={{ location }}/>); 
+  }
+
+  // Valido si el usuario confirmó su correo electrónico
+  if(user && !user.isEmailConfirmed){
+    return (<Navigate to="/app/auth/email-confirmation-required" replace state={{ location }}/>);
   }
 
   return (

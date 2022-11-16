@@ -34,6 +34,17 @@ export const logout = async (token: string): Promise<void> => {
   ).then(response => response.data);
 }
 
+export const sendEmailConfirmationEmail = async (token: string): Promise<void> => {
+  return axiosClient.post('auth/email-confirmation/send', null,
+    { headers: { Authorization: `Bearer ${token}` } }
+  ).then(response => response.data);
+}
+
+export const confirmEmail = async (token: string): Promise<void> => {
+  return axiosClient.post('auth/email-confirmation/confirm', null,
+    { headers: { Authorization: `Bearer ${token}` } }
+  ).then(response => response.data);
+}
 
 
 // # Queries --------------------------------------------

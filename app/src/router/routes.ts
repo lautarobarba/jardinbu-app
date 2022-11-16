@@ -19,6 +19,8 @@ export const ROUTES = {
   REGISTER: "register",
   LOGIN: "login",
   LOGOUT: "logout",
+  CONFIRM_EMAIL_REQUIRED: "email-confirmation-required",
+  CONFIRM_EMAIL: "confirm-email/:token",
 
   // 404 Error
   ELSE: "*",
