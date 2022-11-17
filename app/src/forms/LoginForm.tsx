@@ -42,8 +42,7 @@ export const LoginForm = () => {
     data: getAuthUserData,
     isSuccess: getAuthUserIsSuccess,
     // isError: getAuthUserIsError,
-    // error: getAuthUserError 
-  // } = useGetAuthUser(session?.accessToken ,{
+    // error: getAuthUserError
   } = useGetAuthUser(session.accessToken, {
     enabled: loginIsSuccess
   });
