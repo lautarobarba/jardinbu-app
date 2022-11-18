@@ -11,6 +11,7 @@ export const ROUTES = {
   DASHBOARD: "",
   // Common routes
   FAMILY: "family",
+  GENUS: "genus",
   SPECIES: "species",
   SPECIMEN: "specimen",
 

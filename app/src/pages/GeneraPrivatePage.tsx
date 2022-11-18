@@ -1,22 +1,22 @@
 import { PageSubTitle } from "../components/PageSubTitle";
 import { PageTitle } from "../components/PageTitle";
-import { Family } from "../interfaces/Family";
 import { Link } from "react-router-dom";
-import { useGetFamilies } from "../api/hooks";
+import { useGetGenera } from "../api/hooks";
 import { useEffect, useState } from "react";
 import { MDBIcon, MDBTable, MDBTableBody, MDBTableHead } from "mdb-react-ui-kit";
-import { CreateFamilyForm } from "../forms/CreateFamilyForm";
+import { Genus } from "../interfaces/Genus";
+import { CreateGenusForm } from "../forms/CreateGenusForm";
 
-export const FamiliesPrivatePage = () => {
+export const GeneraPrivatePage = () => {
   
   // Queries
   const { 
-    isLoading: getFamiliesIsLoading, 
-    isSuccess: getFamiliesIsSuccess, 
-    data: getFamiliesData, 
-    isError: getFamiliesIsError, 
-    // error: getFamiliesError 
-  } = useGetFamilies();
+    isLoading: getGeneraIsLoading, 
+    isSuccess: getGeneraIsSuccess, 
+    data: getGeneraData, 
+    isError: getGeneraIsError, 
+    // error: getGeneraError 
+  } = useGetGenera();
 
   const [ openCreate, setOpenCreate ] = useState<boolean>(false);
 
@@ -25,19 +25,19 @@ export const FamiliesPrivatePage = () => {
   }
 
   useEffect(() => {
-    if(getFamiliesIsSuccess){
-      console.log({getFamiliesData})
+    if(getGeneraData){
+      console.log({getGeneraData})
     }
-  }, [getFamiliesIsSuccess, getFamiliesData]);
+  }, [getGeneraIsSuccess, getGeneraData]);
 
   return (
     <div className="bg-white p-3">
-      <PageTitle title="Familias (vista privada)" />
+      <PageTitle title="Géneros (vista privada)" />
       <Link to="/app/admin" className="text-danger">
         <MDBIcon fas icon="arrow-circle-left" size='2x' />
       </Link>
       <div className="d-flex justify-content-between">
-        <PageSubTitle title="Listado de familias" />
+        <PageSubTitle title="Listado de géneros" />
         <button 
           className={openCreate ? "btn bg-danger text-white" : "btn bg-success text-white"} 
           style={{ maxHeight: '3rem' }}
@@ -47,29 +47,31 @@ export const FamiliesPrivatePage = () => {
         </button>
       </div>
 
-      {openCreate && (<CreateFamilyForm toggleForm={setOpenCreate} />)}
+      {openCreate && (<CreateGenusForm toggleForm={setOpenCreate} />)}
 
-      {getFamiliesIsError && (<p className="text-danger">Error...</p>)}
+      {getGeneraIsError && (<p className="text-danger">Error...</p>)}
 
-      {getFamiliesIsLoading && (<p className="h4">Cargando...</p>)} 
+      {getGeneraIsLoading && (<p className="h4">Cargando...</p>)} 
       
-      {getFamiliesIsSuccess && (
-        <div className="families">
+      {getGeneraIsSuccess && (
+        <div className="genera">
           <MDBTable>
             <MDBTableHead dark>
               <tr>
                 <th scope='col'>#</th>
                 <th scope='col'>Nombre</th>
                 <th scope='col'>Descripción</th>
+                <th scope='col'>Familia</th>
               </tr>
             </MDBTableHead>
             <MDBTableBody>
-            {getFamiliesData.map((family: Family, index: number) => {
+            {getGeneraData.map((genus: Genus, index: number) => {
               return (
-                <tr key={family.id}>
-                  <td>{family.id}</td>
-                  <td>{family.name}</td>
-                  <td>{family.description}</td>
+                <tr key={genus.id}>
+                  <td>{genus.id}</td>
+                  <td>{genus.name}</td>
+                  <td>{genus.description}</td>
+                  <td>{genus.family?.name}</td>
                 </tr>
               );
             })}

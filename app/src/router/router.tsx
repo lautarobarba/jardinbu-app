@@ -16,6 +16,7 @@ import { LogoutPage } from "../pages/LogoutPage";
 import { SpecimensPublicPage } from "../pages/SpecimensPublicPage";
 import { EmailConfirmationRequiredPage } from "../pages/EmailConfirmationRequiredPage";
 import { ConfirmEmailPage } from "../pages/ConfirmEmailPage";
+import { GeneraPrivatePage } from "../pages/GeneraPrivatePage";
 
 export const router = createBrowserRouter([
   {
@@ -69,6 +70,11 @@ export const router = createBrowserRouter([
             // path: '/app/admin/family',
             path: ROUTES.FAMILY,
             element: <FamiliesPrivatePage />,
+          },
+          {
+            // path: '/app/admin/genus',
+            path: ROUTES.GENUS,
+            element: <GeneraPrivatePage />,
           },
           {
             // path: '/app/admin/species',

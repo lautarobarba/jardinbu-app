@@ -7,7 +7,9 @@ import {
 	getFamilies,
 	sendEmailConfirmationEmail,
 	confirmEmail,
-	createFamily
+	createFamily,
+	getGenera,
+	createGenus
 } from "./services";
 
 
@@ -39,6 +41,10 @@ export const useCreateFamily = () => {
 	return useMutation(createFamily);
 }
 
+// ## Genera
+export const useCreateGenus = () => {
+	return useMutation(createGenus);
+}
 
 
 // Queries hooks --------------------------------------------------------------
@@ -52,7 +58,7 @@ export const useGetFamilies = (config?: Omit<UseQueryOptions<any, unknown, any, 
 	return useQuery(['families'], getFamilies, config);
 }
 
-// use query de facu
-// export const useGetProyectos = (
-//   config?: Omit<UseQueryOptions<any, unknown, any, string[]>, 'queryKey' | 'queryFn'>
-// ) => useQuery(['proyectos'], () => getProyectos(), config);
+// ## Genera
+export const useGetGenera = (config?: Omit<UseQueryOptions<any, unknown, any, string[]>, 'queryKey' | 'queryFn'>) => {
+	return useQuery(['genera'], getGenera, config);
+}

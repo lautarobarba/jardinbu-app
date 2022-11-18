@@ -1,7 +1,9 @@
 import Axios from "axios";
 import { CreateFamilyDto } from "../interfaces/CreateFamilyDto";
+import { CreateGenusDto } from "../interfaces/CreateGenusDto";
 import { CreateUserDto } from '../interfaces/CreateUserDto';
 import { Family } from "../interfaces/Family";
+import { Genus } from "../interfaces/Genus";
 import { LoginUserDto } from "../interfaces/LoginUserDto";
 import { SessionDto } from "../interfaces/SessionDto";
 import { User } from "../interfaces/User";
@@ -56,8 +58,14 @@ export const createFamily = async (params: { createFamilyDto: CreateFamilyDto, t
   ).then(response => response.data);
 }
 
-
-
+// ## Genera
+export const createGenus = async (params: { createGenusDto: CreateGenusDto, token: string }): Promise<Family> => {
+  const { createGenusDto, token } = params;
+  console.log({ createGenusDto, token });
+  return axiosClient.post('genus', createGenusDto,
+    { headers: { Authorization: `Bearer ${token}` } }
+  ).then(response => response.data);
+}
 
 // # Queries ------------------------------------------------------------------
 
@@ -69,11 +77,15 @@ export const getAuthUser = async (token: string): Promise<User> => {
 }
 
 // ## Families
-export const getFamilies = async (): Promise<User> => {
+export const getFamilies = async (): Promise<Family[]> => {
   return axiosClient.get('family',
   ).then(response => response.data);
 }
 
-// ## Genra
+// ## Genera
+export const getGenera = async (): Promise<Genus[]> => {
+  return axiosClient.get('genus',
+  ).then(response => response.data);
+}
 
 // ## Species
