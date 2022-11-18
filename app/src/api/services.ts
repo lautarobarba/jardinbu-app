@@ -1,5 +1,7 @@
 import Axios from "axios";
+import { CreateFamilyDto } from "../interfaces/CreateFamilyDto";
 import { CreateUserDto } from '../interfaces/CreateUserDto';
+import { Family } from "../interfaces/Family";
 import { LoginUserDto } from "../interfaces/LoginUserDto";
 import { SessionDto } from "../interfaces/SessionDto";
 import { User } from "../interfaces/User";
@@ -15,8 +17,7 @@ const axiosClient = Axios.create({
 });
 
 
-// # Mutations ------------------------------------------------------------
-
+// # Mutations ----------------------------------------------------------------
 // ## Users
 export const registerUser = async (createUserDto: CreateUserDto): Promise<SessionDto> => {
   return axiosClient.post('auth/register', createUserDto
@@ -46,8 +47,19 @@ export const confirmEmail = async (token: string): Promise<void> => {
   ).then(response => response.data);
 }
 
+// ## Families
+export const createFamily = async (params: { createFamilyDto: CreateFamilyDto, token: string }): Promise<Family> => {
+  const { createFamilyDto, token } = params;
+  console.log({ createFamilyDto, token });
+  return axiosClient.post('family', createFamilyDto,
+    { headers: { Authorization: `Bearer ${token}` } }
+  ).then(response => response.data);
+}
 
-// # Queries --------------------------------------------
+
+
+
+// # Queries ------------------------------------------------------------------
 
 // ## Users
 export const getAuthUser = async (token: string): Promise<User> => {

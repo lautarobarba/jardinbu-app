@@ -6,12 +6,13 @@ import {
 	getAuthUser,
 	getFamilies,
 	sendEmailConfirmationEmail,
-	confirmEmail
+	confirmEmail,
+	createFamily
 } from "./services";
 
 
 // Mutations hooks ------------------------------------------------------------
-
+// TODO:QUITAR CONFIG DE LAS MUTACIONES
 // ## Users
 export const useRegister = (config?: any) => {
 	return useMutation(registerUser, config);
@@ -33,9 +34,14 @@ export const useConfirmEmail = (config?: any) => {
 	return useMutation(confirmEmail, config);
 }
 
+// ## Families
+export const useCreateFamily = () => {
+	return useMutation(createFamily);
+}
 
-// Queries hooks --------------------------------------------
 
+
+// Queries hooks --------------------------------------------------------------
 // ## Users
 export const useGetAuthUser = (token: string, config?: Omit<UseQueryOptions<any, unknown, any, string[]>, 'queryKey' | 'queryFn'>) => {
 	return useQuery(['auth-user'], () => getAuthUser(token), config);

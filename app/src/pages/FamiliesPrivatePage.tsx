@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useGetFamilies } from "../api/hooks";
 import { useEffect, useState } from "react";
 import { MDBIcon, MDBTable, MDBTableBody, MDBTableHead } from "mdb-react-ui-kit";
+import { CreateFamilyForm } from "../forms/CreateFamilyForm";
 
 export const FamiliesPrivatePage = () => {
   
@@ -25,15 +26,6 @@ export const FamiliesPrivatePage = () => {
     setOpenCreate(!openCreate);
   }
 
-  // Mutations
-  // const mutation = useMutation(postTodo, {
-  //   onSuccess: () => {
-  //     // Invalidate and refetch
-  //     queryClient.invalidateQueries(["todos"]);
-  //   },
-  // });
-
-
   useEffect(() => {
     if(getFamiliesIsSuccess){
       console.log({getFamiliesData})
@@ -49,7 +41,7 @@ export const FamiliesPrivatePage = () => {
       <div className="d-flex justify-content-between">
         <PageSubTitle title="Listado de familias" />
         <button 
-          className="btn bg-dark text-white" 
+          className={openCreate ? "btn bg-danger text-white" : "btn bg-success text-white"} 
           style={{ maxHeight: '3rem' }}
           onClick={toggleCreateForm}
         >
@@ -57,7 +49,7 @@ export const FamiliesPrivatePage = () => {
         </button>
       </div>
 
-      {openCreate && (<p>RENDER CREATE FORM</p>)}
+      {openCreate && (<CreateFamilyForm toggleForm={setOpenCreate} />)}
 
       {getFamiliesIsError && (<p className="text-danger">Error...</p>)}
 
