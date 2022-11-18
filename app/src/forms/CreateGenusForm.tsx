@@ -13,7 +13,7 @@ const ValidationSchema = Yup.object().shape({
 	name: Yup.string()
     .min(2, "Demaciado corto")
     .max(100, "Demaciado largo")
-    .required("La familia necesita un nombre"),
+    .required("El género necesita un nombre"),
 	description: Yup.string()
 		.min(2, "Demaciado corto")
 		.max(100, "Demaciado largo"),
@@ -130,7 +130,7 @@ export const CreateGenusForm = (props: Props) => {
       />
       <br />
       <FormControl fullWidth margin="normal">
-        <InputLabel id="familyId">Familia</InputLabel>
+        <InputLabel>Familia</InputLabel>
         <Select
           id="familyId"
           name="familyId"
