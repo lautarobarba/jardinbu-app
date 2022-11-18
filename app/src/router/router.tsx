@@ -17,6 +17,7 @@ import { SpecimensPublicPage } from "../pages/SpecimensPublicPage";
 import { EmailConfirmationRequiredPage } from "../pages/EmailConfirmationRequiredPage";
 import { ConfirmEmailPage } from "../pages/ConfirmEmailPage";
 import { GeneraPrivatePage } from "../pages/GeneraPrivatePage";
+import { SpecimensPrivatePage } from "../pages/SpecimensPrivatePage";
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +81,11 @@ export const router = createBrowserRouter([
             // path: '/app/admin/species',
             path: ROUTES.SPECIES,
             element: <SpeciesPrivatePage />,
+          },
+          {
+            // path: '/app/admin/specimen',
+            path: ROUTES.SPECIMEN,
+            element: <SpecimensPrivatePage />,
           },
           {
             // Si no encuentro ninguna de las rutas anteriores entonces renderizo 404

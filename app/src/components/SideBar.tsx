@@ -59,7 +59,7 @@ export const SideBar = (props: Props) => {
       <Link className="nav-link custom-link" to={"/app/admin/family"} >Familias</Link>
       <Link className="nav-link custom-link" to={"/app/admin/genus"}>Géneros</Link>
       <Link className="nav-link custom-link" to={"/app/admin/species"}>Especies</Link>
-      <Link className="nav-link custom-link" to={"/app/specimen"} >Ejemplares</Link>
+      <Link className="nav-link custom-link" to={"/app/admin/specimen"} >Ejemplares</Link>
     </Drawer>
   );
 };

@@ -11,7 +11,9 @@ import {
 	getGenera,
 	createGenus,
 	getSpecies,
-	createSpecies
+	createSpecies,
+	getSpecimens,
+	createSpecimen
 } from "./services";
 
 
@@ -53,6 +55,11 @@ export const useCreateSpecies = () => {
 	return useMutation(createSpecies);
 }
 
+// ## Species
+export const useCreateSpecimen = () => {
+	return useMutation(createSpecimen);
+}
+
 
 // Queries hooks --------------------------------------------------------------
 // ## Users
@@ -73,4 +80,9 @@ export const useGetGenera = (config?: Omit<UseQueryOptions<any, unknown, any, st
 // ## Species
 export const useGetSpecies = (config?: Omit<UseQueryOptions<any, unknown, any, string[]>, 'queryKey' | 'queryFn'>) => {
 	return useQuery(['species'], getSpecies, config);
+}
+
+// ## Specimens
+export const useGetSpecimens = (config?: Omit<UseQueryOptions<any, unknown, any, string[]>, 'queryKey' | 'queryFn'>) => {
+	return useQuery(['specimens'], getSpecimens, config);
 }

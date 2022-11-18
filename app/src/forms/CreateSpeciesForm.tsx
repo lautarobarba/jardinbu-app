@@ -210,8 +210,8 @@ export const CreateSpeciesForm = (props: Props) => {
           disabled
         >
           {/* <MenuItem key={0} value={0}>Ninguna</MenuItem> */}
-          {/* TODO: Autocompletar al seleccionar una especie */}
-          <MenuItem key={0} value={0}>Autocompletar con especie</MenuItem>
+          {/* TODO: Autocompletar al seleccionar un genero */}
+          <MenuItem key={0} value={0}>Autocompletar con género</MenuItem>
           {getFamiliesIsSuccess && getFamiliesData.map((family: Family) => {
             return (
               <MenuItem key={family.id} value={family.id}>{family.name}</MenuItem>
