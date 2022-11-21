@@ -2,6 +2,7 @@ import { MDBBtn } from "mdb-react-ui-kit";
 import { PageSubTitle } from "../components/PageSubTitle";
 import { PageTitle } from "../components/PageTitle";
 import { Post } from "../components/Post";
+import QRCode from "react-qr-code";
 
 
 export const HomePage = () => {
@@ -28,6 +29,11 @@ export const HomePage = () => {
       {posts.map( (p: any) => {
         return (<Post key={p.title} title={p.title} content={p.content} />);
       })}
+
+      <PageSubTitle title="Probando códigos QR" className="w-100 text-center" />
+      <div style={{ background: 'white', padding: '16px', textAlign: 'center' }}>
+        <QRCode value="hey" />
+      </div>
     </>
   );
 };
