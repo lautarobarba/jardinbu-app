@@ -8,7 +8,7 @@ export interface UpdateUserDto {
 	isEmailConfirmed?: boolean,
 	firstname?: string,
 	lastname?: string,
-	profilePicture?: Picture,
+	profilePicture?: Picture | null,
 	status?: Status,
 	role?: Role,
 }

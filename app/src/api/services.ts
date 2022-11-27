@@ -39,8 +39,12 @@ export const login = async (loginUserDto: LoginUserDto): Promise<SessionDto> => 
 
 export const updateUser = async (params: { updateUserDto: UpdateUserDto, token: string }): Promise<User> => {
   const { updateUserDto, token } = params;
+  console.log({
+    MSG: 'AXIOS PATCH',
+    updateUserDto
+  });
   return axiosClient.patch('user', updateUserDto,
-    { headers: { Authorization: `Bearer ${token}` } }
+    { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' } }
   ).then(response => response.data);
 }
 
