@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import * as Yup from 'yup';
 import { FormikHelpers, useFormik } from 'formik';
 import { TextField } from '@mui/material';
@@ -86,8 +86,8 @@ export const RegisterForm = () => {
         password: values.password
       };
       
-			// console.log(createUserDto);
-      registerMutate(createUserDto, {
+			// console.log({ createUserDto });
+      registerMutate({ createUserDto }, {
         onError: (error) => {
           if(Axios.isAxiosError(error)){
             const errorCode = error.response?.status;

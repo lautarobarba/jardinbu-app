@@ -10,6 +10,7 @@ import { LoginUserDto } from "../interfaces/LoginUserDto";
 import { SessionDto } from "../interfaces/SessionDto";
 import { Species } from "../interfaces/Species";
 import { Specimen } from "../interfaces/Specimen";
+import { UpdateUserDto } from "../interfaces/UpdateUserDto";
 import { User } from "../interfaces/User";
 
 
@@ -25,13 +26,21 @@ const axiosClient = Axios.create({
 
 // # Mutations ----------------------------------------------------------------
 // ## Users
-export const registerUser = async (createUserDto: CreateUserDto): Promise<SessionDto> => {
+export const registerUser = async (params: { createUserDto: CreateUserDto }): Promise<SessionDto> => {
+  const { createUserDto } = params;
   return axiosClient.post('auth/register', createUserDto
   ).then(response => response.data);
 }
 
 export const login = async (loginUserDto: LoginUserDto): Promise<SessionDto> => {
   return axiosClient.post('auth/login', loginUserDto
+  ).then(response => response.data);
+}
+
+export const updateUser = async (params: { updateUserDto: UpdateUserDto, token: string }): Promise<User> => {
+  const { updateUserDto, token } = params;
+  return axiosClient.patch('user', updateUserDto,
+    { headers: { Authorization: `Bearer ${token}` } }
   ).then(response => response.data);
 }
 

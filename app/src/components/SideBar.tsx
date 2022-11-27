@@ -56,10 +56,15 @@ export const SideBar = (props: Props) => {
       </MDBNavbar>
 
       {/* Enlaces */}
+      <hr style={{ margin: 0 }} />
+      <Link className="nav-link custom-link" to={"/app/admin/profile"} >Perfil</Link>
+      <hr style={{ margin: 0 }} />
       <Link className="nav-link custom-link" to={"/app/admin/family"} >Familias</Link>
       <Link className="nav-link custom-link" to={"/app/admin/genus"}>Géneros</Link>
       <Link className="nav-link custom-link" to={"/app/admin/species"}>Especies</Link>
       <Link className="nav-link custom-link" to={"/app/admin/specimen"} >Ejemplares</Link>
+      <hr style={{ margin: 0 }} />
+      <Link className="nav-link custom-link" to={"/app/auth/logout"} >Salir</Link>
     </Drawer>
   );
 };

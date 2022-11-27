@@ -13,31 +13,35 @@ import {
 	getSpecies,
 	createSpecies,
 	getSpecimens,
-	createSpecimen
+	createSpecimen,
+	updateUser
 } from "./services";
 
 
 // Mutations hooks ------------------------------------------------------------
-// TODO:QUITAR CONFIG DE LAS MUTACIONES
 // ## Users
-export const useRegister = (config?: any) => {
-	return useMutation(registerUser, config);
+export const useRegister = () => {
+	return useMutation(registerUser);
 }
 
-export const useLogin = (config?: any) => {
-	return useMutation(login, config);
+export const useLogin = () => {
+	return useMutation(login);
 }
 
-export const useLogout = (config?: any) => {
-	return useMutation(logout, config);
+export const useUpdateUser = () => {
+	return useMutation(updateUser);
 }
 
-export const useSendEmailConfirmationEmail = (config?: any) => {
-	return useMutation(sendEmailConfirmationEmail, config);
+export const useLogout = () => {
+	return useMutation(logout);
 }
 
-export const useConfirmEmail = (config?: any) => {
-	return useMutation(confirmEmail, config);
+export const useSendEmailConfirmationEmail = () => {
+	return useMutation(sendEmailConfirmationEmail);
+}
+
+export const useConfirmEmail = () => {
+	return useMutation(confirmEmail);
 }
 
 // ## Families

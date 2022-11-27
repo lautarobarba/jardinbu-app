@@ -20,6 +20,7 @@ export const ROUTES = {
   REGISTER: "register",
   LOGIN: "login",
   LOGOUT: "logout",
+  PROFILE: 'profile',
   CONFIRM_EMAIL_REQUIRED: "email-confirmation-required",
   CONFIRM_EMAIL: "confirm-email/:token",
 

@@ -18,6 +18,7 @@ import { EmailConfirmationRequiredPage } from "../pages/EmailConfirmationRequire
 import { ConfirmEmailPage } from "../pages/ConfirmEmailPage";
 import { GeneraPrivatePage } from "../pages/GeneraPrivatePage";
 import { SpecimensPrivatePage } from "../pages/SpecimensPrivatePage";
+import { ProfilePage } from "../pages/ProfilePage";
 
 export const router = createBrowserRouter([
   {
@@ -66,6 +67,11 @@ export const router = createBrowserRouter([
             // path: '/app/admin',
             path: ROUTES.DASHBOARD,
             element: <Dashboard />,
+          },
+          {
+            // path: '/app/admin/profile',
+            path: ROUTES.PROFILE,
+            element: <ProfilePage />,
           },
           {
             // path: '/app/admin/family',
